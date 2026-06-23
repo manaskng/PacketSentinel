@@ -1,6 +1,6 @@
 # DPI Engine v2.0
 
-[![Build Status](https://github.com/YOUR_USERNAME/dpi-engine/actions/workflows/build.yml/badge.svg)](https://github.com/YOUR_USERNAME/dpi-engine/actions/workflows/build.yml)
+[![Build Status](https://github.com/manaskng/dpi-engine/actions/workflows/build.yml/badge.svg)](https://github.com/manaskng/dpi-engine/actions/workflows/build.yml)
 
 A high-performance, **multi-threaded Deep Packet Inspection (DPI) engine** written in modern C++17. Classifies network traffic into 15 application types by parsing TLS SNI, HTTP Host headers, and DNS queries — **without any external libraries** (no libpcap, no Boost).
 
