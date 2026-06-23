@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PacketSentinel — Enterprise Traffic Analytics</title>
+    <meta name="description" content="Real-time Deep Packet Inspection dashboard showing live traffic classification, blocking statistics, and application breakdown.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/>
+                        <path d="M8 12l4 4 4-4" stroke-linecap="round" stroke-linejoin="round" color="#38bdf8"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="logo-title">PacketSentinel</div>
+                    <div class="logo-sub">Enterprise Traffic Analytics</div>
+                </div>
+            </div>
+
+            <div class="header-status">
+                <div class="status-badge" id="statusBadge">
+                    <span class="status-dot"></span>
+                    <span id="statusText">Loading...</span>
+                </div>
+                <div class="header-time" id="headerTime"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main">
+        <!-- Top Metrics Row -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span class="metric-title">TOTAL PACKETS</span>
+                    <span class="metric-icon" style="color: var(--text-primary);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg>
+                    </span>
+                </div>
+                <div class="metric-value" id="totalPackets">—</div>
+                <div class="metric-footer" id="totalDelta">...</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span class="metric-title">FORWARDED</span>
+                    <span class="metric-icon" style="color: var(--accent-green);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                    </span>
+                </div>
+                <div class="metric-value" id="forwarded">—</div>
+                <div class="metric-footer" id="fwdPct">...</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span class="metric-title">BLOCKED</span>
+                    <span class="metric-icon" style="color: var(--accent-red);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                    </span>
+                </div>
+                <div class="metric-value" style="color: var(--accent-red);" id="dropped">—</div>
+                <div class="metric-footer" id="dropPct">...</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span class="metric-title">THROUGHPUT</span>
+                    <span class="metric-icon" style="color: var(--accent-blue);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </span>
+                </div>
+                <div class="metric-value" id="throughput">—</div>
+                <div class="metric-footer" id="kpps">packets/sec</div>
+            </div>
+        </section>
+
+        <!-- Charts Row 1: Line Chart & Doughnut -->
+        <section class="charts-row">
+            <div class="panel panel-large">
+                <div class="panel-header">
+                    <h2 class="panel-title">Packet Rate (Throughput)</h2>
+                </div>
+                <div class="panel-body chart-container">
+                    <canvas id="throughputLineChart"></canvas>
+                </div>
+            </div>
+            <div class="panel panel-small">
+                <div class="panel-header">
+                    <h2 class="panel-title">Action Distribution</h2>
+                </div>
+                <div class="panel-body chart-container">
+                    <canvas id="actionDoughnutChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Row 2: Histogram -->
+        <section class="panel">
+            <div class="panel-header">
+                <h2 class="panel-title">Application Traffic Histogram</h2>
+                <span class="panel-badge" id="classifiedCount">0 flows classified</span>
+            </div>
+            <div class="panel-body chart-container" style="height: 250px;">
+                <canvas id="appHistogramChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Data Tables Row -->
+        <section class="tables-grid">
+            <!-- Protocol Breakdown Table -->
+            <div class="panel panel-wide">
+                <div class="panel-header">
+                    <h2 class="panel-title">Protocol Details</h2>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Application</th>
+                                <th>Packets</th>
+                                <th>Traffic Share</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="protoTableBody">
+                            <tr><td colspan="4" class="loading-msg">Loading data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Detected Domains & Threads -->
+            <div class="side-panels">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Detected Domains</h2>
+                        <span class="panel-badge" id="sniCount">0 domains</span>
+                    </div>
+                    <div class="list-container" id="sniList">
+                        <div class="loading-msg">Waiting for traffic...</div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Thread Pipeline</h2>
+                    </div>
+                    <div class="list-container" id="threadStats">
+                        <div class="loading-msg">No data</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>PacketSentinel v2.0 — Enterprise Edition | C++17</div>
+            <div>Auto-refreshes every <span id="refreshInterval">2</span>s from <code>stats.json</code></div>
+        </div>
+    </footer>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

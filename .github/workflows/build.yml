@@ -1,0 +1,144 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-linux:
+    name: Linux Build (GCC 13)
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install GCC 13
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc-13 g++-13
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
+
+    - name: Verify compiler
+      run: g++ --version
+
+    - name: Build simple (single-threaded)
+      run: |
+        g++ -std=c++17 -O2 -Wall -Wextra -I include \
+          -o dpi_simple \
+          src/types.cpp \
+          src/pcap_reader.cpp \
+          src/packet_parser.cpp \
+          src/sni_extractor.cpp \
+          src/rule_manager.cpp \
+          src/main_simple.cpp
+
+    - name: Build mt (multi-threaded)
+      run: |
+        g++ -std=c++17 -O2 -Wall -Wextra -pthread -I include \
+          -o dpi_engine \
+          src/types.cpp \
+          src/pcap_reader.cpp \
+          src/packet_parser.cpp \
+          src/sni_extractor.cpp \
+          src/rule_manager.cpp \
+          src/load_balancer.cpp \
+          src/fast_path.cpp \
+          src/dpi_engine.cpp \
+          src/main_mt.cpp \
+          -lpthread
+
+    - name: Generate test PCAP
+      run: python3 scripts/generate_test_pcap.py
+
+    - name: Test simple engine
+      run: |
+        ./dpi_simple test_data/test_small.pcap test_data/output_simple.pcap \
+          --block-app YouTube --block-ip 192.168.1.50
+        echo "Simple engine exit code: $?"
+
+    - name: Test MT engine
+      run: |
+        ./dpi_engine test_data/test_small.pcap test_data/output_mt.pcap \
+          --lbs 2 --fps 2 --block-app YouTube --no-stats
+        echo "MT engine exit code: $?"
+
+    - name: Validate output PCAP exists
+      run: |
+        test -f test_data/output_simple.pcap && echo "✓ simple output exists"
+        test -f test_data/output_mt.pcap     && echo "✓ MT output exists"
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: dpi-engine-linux
+        path: |
+          dpi_simple
+          dpi_engine
+        retention-days: 7
+
+  build-windows:
+    name: Windows Build (MSYS2 GCC)
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup MSYS2
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW64
+        update: true
+        install: >-
+          mingw-w64-x86_64-gcc
+          mingw-w64-x86_64-make
+
+    - name: Build simple
+      shell: msys2 {0}
+      run: |
+        g++ -std=c++17 -O2 -I include \
+          -o dpi_simple.exe \
+          src/types.cpp \
+          src/pcap_reader.cpp \
+          src/packet_parser.cpp \
+          src/sni_extractor.cpp \
+          src/rule_manager.cpp \
+          src/main_simple.cpp
+
+    - name: Build MT
+      shell: msys2 {0}
+      run: |
+        g++ -std=c++17 -O2 -pthread -I include \
+          -o dpi_engine.exe \
+          src/types.cpp \
+          src/pcap_reader.cpp \
+          src/packet_parser.cpp \
+          src/sni_extractor.cpp \
+          src/rule_manager.cpp \
+          src/load_balancer.cpp \
+          src/fast_path.cpp \
+          src/dpi_engine.cpp \
+          src/main_mt.cpp \
+          -lpthread
+
+    - name: Generate test data
+      shell: msys2 {0}
+      run: python3 scripts/generate_test_pcap.py || python scripts/generate_test_pcap.py
+
+    - name: Test engines
+      shell: msys2 {0}
+      run: |
+        ./dpi_simple.exe test_data/test_small.pcap test_data/output_simple.pcap --block-app YouTube
+        ./dpi_engine.exe test_data/test_small.pcap test_data/output_mt.pcap --lbs 1 --fps 2 --no-stats
+
+    - name: Upload Windows artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: dpi-engine-windows
+        path: |
+          dpi_simple.exe
+          dpi_engine.exe
+        retention-days: 7

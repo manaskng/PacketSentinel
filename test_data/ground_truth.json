@@ -1,0 +1,418 @@
+{
+  "192.168.1.101:51080->203.0.113.66:443": {
+    "sni": "www.tiktok.com",
+    "http_host": null,
+    "app": "TikTok",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.100:62536->203.0.113.32:443": {
+    "sni": "www.instagram.com",
+    "http_host": null,
+    "app": "Instagram",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.100:56718->203.0.113.73:443": {
+    "sni": "www.reddit.com",
+    "http_host": null,
+    "app": "Reddit",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.100:63808->203.0.113.72:443": {
+    "sni": "www.netflix.com",
+    "http_host": null,
+    "app": "Netflix",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.101:57275->203.0.113.81:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.100:55697->203.0.113.70:443": {
+    "sni": "www.google.com",
+    "http_host": null,
+    "app": "Google",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.100:58613->203.0.113.27:443": {
+    "sni": "www.twitch.tv",
+    "http_host": null,
+    "app": "Twitch",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.101:54038->203.0.113.88:443": {
+    "sni": "www.twitter.com",
+    "http_host": null,
+    "app": "Twitter",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.100:55640->203.0.113.23:443": {
+    "sni": "www.tiktok.com",
+    "http_host": null,
+    "app": "TikTok",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.100:62036->203.0.113.71:443": {
+    "sni": "www.facebook.com",
+    "http_host": null,
+    "app": "Facebook",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.100:62648->8.8.8.8:53": {
+    "dns_query": "github.com",
+    "app": "DNS",
+    "type": "dns",
+    "packet_count": 1
+  },
+  "192.168.1.101:50919->203.0.113.22:443": {
+    "sni": "discord.com",
+    "http_host": null,
+    "app": "Discord",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.101:49610->203.0.113.66:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.100:50619->203.0.113.14:80": {
+    "sni": null,
+    "http_host": "api.example.com",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 9
+  },
+  "192.168.1.101:51877->203.0.113.17:443": {
+    "sni": "www.whatsapp.com",
+    "http_host": null,
+    "app": "WhatsApp",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.101:64534->203.0.113.48:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.100:53052->203.0.113.91:443": {
+    "sni": "www.instagram.com",
+    "http_host": null,
+    "app": "Instagram",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.101:58786->203.0.113.22:443": {
+    "sni": "www.google.com",
+    "http_host": null,
+    "app": "Google",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.101:57786->203.0.113.3:443": {
+    "sni": "www.google.com",
+    "http_host": null,
+    "app": "Google",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.100:64196->8.8.8.8:53": {
+    "dns_query": "www.netflix.com",
+    "app": "DNS",
+    "type": "dns",
+    "packet_count": 1
+  },
+  "192.168.1.101:56532->203.0.113.57:443": {
+    "sni": "www.google.com",
+    "http_host": null,
+    "app": "Google",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.100:58411->203.0.113.51:443": {
+    "sni": "www.twitter.com",
+    "http_host": null,
+    "app": "Twitter",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.100:56974->203.0.113.60:443": {
+    "sni": "www.tiktok.com",
+    "http_host": null,
+    "app": "TikTok",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.101:54387->203.0.113.15:80": {
+    "sni": null,
+    "http_host": "example.com",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 10
+  },
+  "192.168.1.100:57393->8.8.8.8:53": {
+    "dns_query": "api.tiktok.com",
+    "app": "DNS",
+    "type": "dns",
+    "packet_count": 1
+  },
+  "192.168.1.100:60316->203.0.113.70:443": {
+    "sni": "www.twitch.tv",
+    "http_host": null,
+    "app": "Twitch",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.101:62704->203.0.113.52:443": {
+    "sni": "www.netflix.com",
+    "http_host": null,
+    "app": "Netflix",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.101:62760->203.0.113.10:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.101:52588->203.0.113.45:443": {
+    "sni": "www.facebook.com",
+    "http_host": null,
+    "app": "Facebook",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.100:52256->203.0.113.12:443": {
+    "sni": "www.reddit.com",
+    "http_host": null,
+    "app": "Reddit",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.101:62439->203.0.113.31:443": {
+    "sni": "www.github.com",
+    "http_host": null,
+    "app": "GitHub",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.101:58705->203.0.113.46:8080": {
+    "sni": null,
+    "http_host": "cdn.example.org",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 8
+  },
+  "192.168.1.100:51823->8.8.8.8:53": {
+    "dns_query": "www.netflix.com",
+    "app": "DNS",
+    "type": "dns",
+    "packet_count": 1
+  },
+  "192.168.1.101:49497->203.0.113.42:8080": {
+    "sni": null,
+    "http_host": "cdn.example.org",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 8
+  },
+  "192.168.1.100:62840->203.0.113.44:443": {
+    "sni": "www.whatsapp.com",
+    "http_host": null,
+    "app": "WhatsApp",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.101:52548->203.0.113.17:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.101:62066->203.0.113.2:80": {
+    "sni": null,
+    "http_host": "api.example.com",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 7
+  },
+  "192.168.1.100:64397->203.0.113.3:443": {
+    "sni": "www.netflix.com",
+    "http_host": null,
+    "app": "Netflix",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.100:57840->203.0.113.38:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.100:58145->203.0.113.64:443": {
+    "sni": "www.github.com",
+    "http_host": null,
+    "app": "GitHub",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.101:54988->203.0.113.75:443": {
+    "sni": "discord.com",
+    "http_host": null,
+    "app": "Discord",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.100:57416->203.0.113.78:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.100:59337->203.0.113.30:443": {
+    "sni": "www.reddit.com",
+    "http_host": null,
+    "app": "Reddit",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.100:62233->203.0.113.91:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.101:62306->203.0.113.19:443": {
+    "sni": "www.google.com",
+    "http_host": null,
+    "app": "Google",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.101:56837->203.0.113.63:443": {
+    "sni": "www.netflix.com",
+    "http_host": null,
+    "app": "Netflix",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.100:54671->203.0.113.57:80": {
+    "sni": null,
+    "http_host": "example.com",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 8
+  },
+  "192.168.1.100:56670->203.0.113.15:443": {
+    "sni": "www.twitter.com",
+    "http_host": null,
+    "app": "Twitter",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.100:62157->203.0.113.51:443": {
+    "sni": "www.instagram.com",
+    "http_host": null,
+    "app": "Instagram",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.100:50681->203.0.113.47:443": {
+    "sni": "www.google.com",
+    "http_host": null,
+    "app": "Google",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.50:57344->203.0.113.32:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.50:50601->203.0.113.42:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 7
+  },
+  "192.168.1.50:54518->203.0.113.64:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.50:57714->203.0.113.54:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.50:50154->203.0.113.73:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.50:53447->203.0.113.57:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 8
+  },
+  "192.168.1.50:62106->203.0.113.54:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 10
+  },
+  "192.168.1.50:54073->203.0.113.61:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.50:52215->203.0.113.72:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 9
+  },
+  "192.168.1.50:57051->203.0.113.49:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 8
+  }
+}

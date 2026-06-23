@@ -1,0 +1,22 @@
+# DPI Engine — Build outputs and test data
+*.exe
+*.o
+*.a
+dpi_simple
+dpi_engine
+
+# Test data (large PCAPs)
+test_data/*.pcap
+test_data/benchmark_results.json
+
+# Keep ground truth JSONs
+!test_data/ground_truth.json
+
+# Dashboard auto-generated stats
+stats.json
+
+# Editor files
+.vscode/
+*.swp
+*~
+.DS_Store
