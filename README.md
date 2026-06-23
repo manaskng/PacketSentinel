@@ -292,45 +292,5 @@ Each FastPath maintains a `std::unordered_map<FiveTuple, FlowEntry>` keyed by (s
 
 ---
 
-## Interview Reference
-
-| Question | Answer |
-|---|---|
-| Why not use libpcap? | Reading PCAP binary format directly demonstrates understanding of file format specifications and byte-level I/O. libpcap is a convenience wrapper — parsing the global header and per-packet records from scratch shows deeper protocol knowledge. |
-| Why per-FastPath flow tables instead of a shared table? | A shared flow table requires a mutex on every packet lookup, creating lock contention that scales inversely with thread count. Per-FastPath tables eliminate synchronization entirely on the hot path — the 5-tuple hash guarantees all packets of a flow reach the same thread. |
-| Why `condition_variable` in TSQueue? | Busy-wait polling burns CPU cycles checking an empty queue. `condition_variable::wait()` suspends the thread, returning CPU time to the OS scheduler. The thread is woken only when data is enqueued, which is the correct synchronization pattern for producer-consumer pipelines. |
-| How is SNI extracted from TLS? | Walk the TLS record header, locate the ClientHello handshake message, iterate the extensions list, find extension type 0x0000, and extract the hostname from the server_name_list at the correct byte offset. All bounds-checked in a single pass. |
-| How does blocking scale with flow count? | After the first packet classifies a flow, subsequent packets hit only the hash map — O(1) lookup. The block flag is set at flow creation time, so packet processing cost is constant regardless of how many rules exist or how large the blocked-app list is. |
-| How does the dashboard get data without a web server? | The C++ engine writes stats atomically to `stats.json` on disk. The browser polls this file every 2 seconds using the Fetch API. This decouples the UI entirely from the engine — no HTTP server, no WebSocket, no added latency on the packet processing path. |
-
----
-
-## Comparison: PacketSentinel vs. Python / Scapy Approach
-
-| Dimension | PacketSentinel (C++17) | Python + Scapy |
-|---|---|---|
-| Max throughput | ~438,000 pkt/s | ~1,000–5,000 pkt/s |
-| DPI depth | TLS SNI, HTTP Host, DNS QNAME | IP metadata only |
-| External dependencies | None | scapy, pandas, scikit-learn, streamlit, plotly |
-| Anomaly detection | Rule-based, deterministic | ML (IsolationForest) |
-| Packet drops under load | None (bounded queues) | High at line rate |
-| UI architecture | Decoupled static dashboard | Embedded Streamlit |
-| Use case fit | Production traffic analysis | Data-science prototyping |
-
----
-
-## Resume Bullet Points
-
-The following bullet points accurately represent the technical work done in this project and are directly suitable for a software engineering resume under a Systems / Backend / Infrastructure role:
-
-- Engineered a **multi-threaded Deep Packet Inspection engine in C++17** capable of classifying network traffic at **438,000 packets/sec** across a 2-LB x 2-FastPath thread pipeline, with zero external library dependencies
-- Implemented **byte-level TLS ClientHello parsing** to extract Server Name Indication (SNI) fields from raw TCP payloads, enabling Layer 7 application classification (YouTube, Netflix, Discord, etc.) without decryption
-- Designed a **lock-free flow caching architecture** using per-FastPath `unordered_map` tables keyed by 5-tuple, eliminating shared-state synchronization on the hot path and achieving linear throughput scaling with thread count
-- Built a **custom binary PCAP reader/writer** from the file format specification, bypassing libpcap to demonstrate direct byte-level I/O and file format knowledge
-- Authored a **rule engine** supporting IP-based, application-based, and domain-based traffic blocking and throttling, loaded from a JSON configuration at startup
-- Developed a **real-time analytics dashboard** (HTML/CSS/Chart.js) decoupled from the C++ engine via async JSON polling, featuring throughput timelines, traffic histograms, and per-thread distribution charts
-- Configured **GitHub Actions CI** for cross-platform builds (Ubuntu GCC 13 + Windows MSYS2 GCC 16), ensuring build correctness on every push
-
----
 
 *Full technical documentation, protocol parsing details, and architecture rationale are in [DOCUMENTATION.md](DOCUMENTATION.md).*
