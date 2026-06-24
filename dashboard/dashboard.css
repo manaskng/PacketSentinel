@@ -1,4 +1,4 @@
-﻿/* =============================================================================
+/* =============================================================================
    dashboard.css — PacketSentinel Advanced Analytics Dashboard
    Light default, full dark mode toggle via [data-theme]
    ============================================================================= */
@@ -44,7 +44,7 @@ html { scroll-behavior: smooth; }
 body {
     background: var(--bg);
     color: var(--text-1);
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Outfit', -apple-system, sans-serif;
     font-size: 13px;
     line-height: 1.5;
     min-height: 100vh;
@@ -76,7 +76,7 @@ body {
 .load-bar { width: 200px; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; margin: 0 auto 12px; }
 .load-bar-fill { height: 100%; background: var(--accent-blue); border-radius: 2px; animation: loadfill 1s ease-in-out forwards; }
 @keyframes loadfill { from { width: 0; } to { width: 100%; } }
-.load-sub { color: var(--text-3); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.load-sub { color: var(--text-3); font-family: 'Fira Code', monospace; font-size: 12px; }
 
 /* ---- Header ---------------------------------------------------------------- */
 .header {
@@ -106,7 +106,7 @@ body {
 .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-amber); animation: blink 2s infinite; }
 .status-dot.live { background: var(--accent-green); animation: none; }
 @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
-.header-time { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-3); }
+.header-time { font-family: 'Fira Code', monospace; font-size: 12px; color: var(--text-3); }
 .header-controls { display: flex; align-items: center; gap: 8px; padding-left: 16px; border-left: 1px solid var(--border); }
 .icon-btn {
     background: none; border: 1px solid var(--border);
@@ -140,7 +140,7 @@ body {
 .metric-card:hover { border-color: var(--border-h); }
 .anomaly-card { border-left: 3px solid var(--accent-amber); }
 .metric-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-3); text-transform: uppercase; margin-bottom: 8px; }
-.metric-value { font-size: 28px; font-weight: 700; color: var(--text-1); line-height: 1.1; font-family: 'JetBrains Mono', monospace; }
+.metric-value { font-size: 28px; font-weight: 700; color: var(--text-1); line-height: 1.1; font-family: 'Fira Code', monospace; }
 .metric-delta { font-size: 11px; color: var(--text-3); margin-top: 6px; }
 .accent-blue   { color: var(--accent-blue)   !important; }
 .accent-green  { color: var(--accent-green)  !important; }
@@ -163,7 +163,7 @@ body {
     border-bottom: 1px solid var(--border);
 }
 .panel-title { font-size: 13px; font-weight: 600; color: var(--text-1); }
-.panel-tag { font-size: 11px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; }
+.panel-tag { font-size: 11px; color: var(--text-3); font-family: 'Fira Code', monospace; }
 .panel-badge {
     font-size: 11px; font-weight: 600;
     background: var(--accent-amber);
@@ -196,7 +196,7 @@ body {
 .pipe-node.fp      { border-color: var(--accent-purple); color: var(--accent-purple); }
 .pipe-node.output  { border-color: var(--accent-amber);  color: var(--accent-amber); }
 .pipe-label { font-size: 10px; color: var(--text-3); text-align: center; }
-.pipe-sub { font-size: 10px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; }
+.pipe-sub { font-size: 10px; color: var(--text-3); font-family: 'Fira Code', monospace; }
 .pipe-arrow {
     display: flex; align-items: center; padding: 0 4px; color: var(--text-3);
     font-size: 18px; padding-top: 0px; flex-shrink: 0; align-self: flex-start; margin-top: 18px;
@@ -225,7 +225,7 @@ body {
 .badge-red    { background: rgba(220,38,38,0.1);  color: var(--accent-red); }
 .badge-amber  { background: rgba(217,119,6,0.1);  color: var(--accent-amber); }
 .badge-green  { background: rgba(5,150,105,0.1);  color: var(--accent-green); }
-.score-formula { font-size: 10px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; margin-bottom: 12px; line-height: 1.4; }
+.score-formula { font-size: 10px; color: var(--text-3); font-family: 'Fira Code', monospace; margin-bottom: 12px; line-height: 1.4; }
 .score-track { height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 6px; overflow: hidden; }
 .score-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
 .fill-purple { background: var(--accent-purple); }
@@ -254,8 +254,8 @@ body {
 .data-table tr:hover td { background: var(--bg-hover); }
 .highlight-row td { background: rgba(124,58,237,0.04); }
 .feat-name { font-weight: 600; color: var(--text-1); white-space: nowrap; }
-.feat-ref  { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); white-space: nowrap; }
-.feat-val  { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; color: var(--text-1); white-space: nowrap; }
+.feat-ref  { font-family: 'Fira Code', monospace; font-size: 11px; color: var(--text-3); white-space: nowrap; }
+.feat-val  { font-family: 'Fira Code', monospace; font-size: 12px; font-weight: 500; color: var(--text-1); white-space: nowrap; }
 .loading-msg { padding: 24px; text-align: center; color: var(--text-3); }
 
 /* ---- Tags ------------------------------------------------------------------ */
@@ -270,13 +270,13 @@ body {
 .status-allowed { background: rgba(5,150,105,0.1); color: var(--accent-green); }
 .status-blocked { background: rgba(220,38,38,0.1); color: var(--accent-red); }
 .status-anomaly { background: rgba(217,119,6,0.1); color: var(--accent-amber); }
-.anomaly-score  { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 12px; }
+.anomaly-score  { font-family: 'Fira Code', monospace; font-weight: 600; font-size: 12px; }
 
 /* ---- List Containers ------------------------------------------------------- */
 .list-container { padding: 8px 0; max-height: 200px; overflow-y: auto; }
 .list-item { padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
 .list-item:last-child { border-bottom: none; }
-.list-item-main { font-size: 12px; color: var(--text-1); font-family: 'JetBrains Mono', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.list-item-main { font-size: 12px; color: var(--text-1); font-family: 'Fira Code', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .list-item-sub  { font-size: 10px; color: var(--text-3); margin-left: 8px; white-space: nowrap; }
 
 /* ---- Architecture Block ---------------------------------------------------- */
