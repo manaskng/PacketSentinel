@@ -1,243 +1,310 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PacketSentinel — Enterprise Traffic Analytics</title>
-    <meta name="description" content="Real-time Deep Packet Inspection dashboard showing live traffic classification, blocking statistics, and application breakdown.">
-    
-    <!-- Fonts -->
+    <title>PacketSentinel — Deep Packet Inspection & Anomaly Analytics</title>
+    <meta name="description" content="Real-time multi-threaded DPI engine — flow classification, payload analysis, Shannon entropy scoring, anomaly detection.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Chart.js -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <!-- Loading Overlay -->
+    <!-- Loading Screen -->
     <div id="loadingScreen" class="loading-screen">
-        <div class="spinner"></div>
-        <div class="loading-text">Initializing Engine...</div>
+        <div class="load-inner">
+            <div class="load-logo">PS</div>
+            <div class="load-title">PacketSentinel</div>
+            <div class="load-bar"><div class="load-bar-fill"></div></div>
+            <div class="load-sub">Initializing DPI Engine...</div>
+        </div>
     </div>
 
     <!-- Header -->
     <header class="header">
         <div class="header-inner">
             <div class="logo">
-                <div class="logo-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/>
-                        <path d="M8 12l4 4 4-4" stroke-linecap="round" stroke-linejoin="round" color="#38bdf8"/>
-                    </svg>
-                </div>
+                <div class="logo-mark">PS</div>
                 <div>
                     <div class="logo-title">PacketSentinel</div>
-                    <div class="logo-sub">Enterprise Traffic Analytics</div>
+                    <div class="logo-sub">C++17 &middot; Multi-threaded DPI &middot; Anomaly Detection</div>
                 </div>
             </div>
-
-            <div class="header-status">
+            <div class="header-right">
                 <div class="status-badge" id="statusBadge">
                     <span class="status-dot"></span>
-                    <span id="statusText">Loading...</span>
+                    <span id="statusText">Connecting...</span>
                 </div>
                 <div class="header-time" id="headerTime"></div>
-                
                 <div class="header-controls">
-                    <!-- Theme Toggle -->
-                    <button id="themeToggle" class="icon-btn" aria-label="Toggle Theme" title="Toggle Theme">
-                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
-                        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <button id="themeToggle" class="icon-btn" title="Toggle Theme">
+                        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+                        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                     </button>
-                    <!-- GitHub Link -->
-                    <a href="https://github.com/manaskng/PacketSentinel" target="_blank" class="icon-btn" aria-label="GitHub Repository" title="GitHub Repository">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    <a href="https://github.com/manaskng/PacketSentinel" target="_blank" class="icon-btn" title="GitHub Repository">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                     </a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main content -->
     <main class="main">
-        <!-- Top Metrics Row -->
+
+        <!-- ROW 1: KPI Metrics -->
         <section class="metrics-grid">
             <div class="metric-card">
-                <div class="metric-header">
-                    <span class="metric-title">TOTAL PACKETS</span>
-                    <span class="metric-icon" style="color: var(--text-primary);">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg>
-                    </span>
-                </div>
-                <div class="metric-value" id="totalPackets">—</div>
-                <div class="metric-footer" id="totalDelta">...</div>
+                <div class="metric-label">TOTAL PACKETS</div>
+                <div class="metric-value" id="totalPackets">-</div>
+                <div class="metric-delta" id="totalDelta">processed</div>
             </div>
-
             <div class="metric-card">
-                <div class="metric-header">
-                    <span class="metric-title">FORWARDED</span>
-                    <span class="metric-icon" style="color: var(--accent-green);">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
-                    </span>
-                </div>
-                <div class="metric-value" id="forwarded">—</div>
-                <div class="metric-footer" id="fwdPct">...</div>
+                <div class="metric-label">THROUGHPUT</div>
+                <div class="metric-value accent-blue" id="throughput">-</div>
+                <div class="metric-delta" id="kpps">kilo-pkts / sec</div>
             </div>
-
             <div class="metric-card">
-                <div class="metric-header">
-                    <span class="metric-title">BLOCKED</span>
-                    <span class="metric-icon" style="color: var(--accent-red);">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
-                    </span>
-                </div>
-                <div class="metric-value" style="color: var(--accent-red);" id="dropped">—</div>
-                <div class="metric-footer" id="dropPct">...</div>
+                <div class="metric-label">ACTIVE FLOWS</div>
+                <div class="metric-value" id="classified">-</div>
+                <div class="metric-delta">tracked 5-tuple flows</div>
             </div>
-
             <div class="metric-card">
-                <div class="metric-header">
-                    <span class="metric-title">THROUGHPUT</span>
-                    <span class="metric-icon" style="color: var(--accent-blue);">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                    </span>
-                </div>
-                <div class="metric-value" id="throughput">—</div>
-                <div class="metric-footer" id="kpps">packets/sec</div>
+                <div class="metric-label">FORWARDED</div>
+                <div class="metric-value accent-green" id="forwarded">-</div>
+                <div class="metric-delta" id="fwdPct">-</div>
             </div>
-
             <div class="metric-card">
-                <div class="metric-header">
-                    <span class="metric-title">ANOMALIES</span>
-                    <span class="metric-icon" style="color: var(--accent-amber);">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    </span>
-                </div>
-                <div class="metric-value" style="color: var(--accent-amber);" id="totalAnomalies">—</div>
-                <div class="metric-footer" id="anomalyFooter">...</div>
+                <div class="metric-label">BLOCKED</div>
+                <div class="metric-value accent-red" id="dropped">-</div>
+                <div class="metric-delta" id="dropPct">-</div>
+            </div>
+            <div class="metric-card anomaly-card">
+                <div class="metric-label">ANOMALIES FLAGGED</div>
+                <div class="metric-value accent-amber" id="anomalyCount">-</div>
+                <div class="metric-delta" id="anomalyType">No anomaly detected</div>
             </div>
         </section>
 
-        <!-- Charts Row 1: Line Chart & Doughnut -->
-        <section class="charts-row">
-            <div class="panel panel-large">
-                <div class="panel-header">
-                    <h2 class="panel-title">Packet Rate (Throughput)</h2>
-                </div>
-                <div class="panel-body chart-container">
-                    <canvas id="throughputLineChart"></canvas>
-                </div>
+        <!-- ROW 2: Pipeline Visualiser -->
+        <section class="panel pipeline-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">Multi-Threaded Pipeline — Live State</h2>
+                <span class="panel-tag">Lock-Free &middot; 5-tuple Hash Routing &middot; Poison-Pill Shutdown</span>
             </div>
-            <div class="panel panel-small">
-                <div class="panel-header">
-                    <h2 class="panel-title">Action Distribution</h2>
-                </div>
-                <div class="panel-body chart-container">
-                    <canvas id="actionDoughnutChart"></canvas>
-                </div>
+            <div class="pipeline-viz" id="pipelineViz">
+                <!-- populated by JS -->
             </div>
         </section>
 
-        <!-- Anomaly Detection Panel -->
+        <!-- ROW 3: Charts -->
+        <div class="two-col">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">Packet Rate Timeline</h2>
+                    <span class="panel-tag">60s rolling window &middot; auto-refresh 2s</span>
+                </div>
+                <div class="chart-wrap"><canvas id="throughputLineChart"></canvas></div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">Traffic Decision Ratio</h2>
+                    <span class="panel-tag">Forwarded vs. Blocked</span>
+                </div>
+                <div class="chart-wrap"><canvas id="actionDoughnutChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- ROW 4: Payload Scoring Meters -->
         <section class="panel">
             <div class="panel-header">
-                <h2 class="panel-title">Anomaly Detection</h2>
-                <span class="panel-badge" id="anomalyBadge">0 threats flagged</span>
+                <h2 class="panel-title">Payload Analysis &amp; Anomaly Scoring</h2>
+                <span class="panel-tag">Shannon Entropy &middot; Welford Variance &middot; Z-score &middot; TCP Flag Ratio</span>
+            </div>
+            <div class="scoring-grid">
+                <div class="score-card">
+                    <div class="score-header">
+                        <span class="score-name">Shannon Entropy</span>
+                        <span class="score-badge badge-purple">C2 / Tunneling</span>
+                    </div>
+                    <div class="score-formula">H(X) = &minus;&#x2211; p(x) &middot; log&#x2082; p(x)</div>
+                    <div class="score-track"><div class="score-fill fill-purple" id="scoreEntropy" style="width:0%"></div></div>
+                    <div class="score-labels"><span>0 bits (uniform)</span><span>8 bits (max random)</span></div>
+                    <div class="score-insight">Encrypted C2 &amp; exfil payloads score &ge;7.5 bits &mdash; normal HTTP sits at 4&ndash;6 bits. Based on Bro/Zeek IDS research.</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-header">
+                        <span class="score-name">Packet Size Variance</span>
+                        <span class="score-badge badge-red">DDoS Suspect</span>
+                    </div>
+                    <div class="score-formula">&#x3C3;&#xB2; via Welford&#x27;s Online Algorithm (O(1) memory)</div>
+                    <div class="score-track"><div class="score-fill fill-red" id="scoreVariance" style="width:0%"></div></div>
+                    <div class="score-labels"><span>0 (identical pkts)</span><span>High variance</span></div>
+                    <div class="score-insight">Amplification DDoS floods use fixed-size payloads, yielding near-zero variance. Normal web traffic varies wildly.</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-header">
+                        <span class="score-name">SYN / FIN Ratio</span>
+                        <span class="score-badge badge-red">Port Scan / SYN Flood</span>
+                    </div>
+                    <div class="score-formula">ratio = syn&#x5F;count / max(fin&#x5F;count + rst&#x5F;count, 1)</div>
+                    <div class="score-track"><div class="score-fill fill-amber" id="scoreSynFin" style="width:0%"></div></div>
+                    <div class="score-labels"><span>1:1 (normal)</span><span>High (attack)</span></div>
+                    <div class="score-insight">Port scanners &amp; SYN floods never complete the 3-way handshake. FIN/RST counts remain at zero. NSL-KDD flag feature.</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-header">
+                        <span class="score-name">Byte Volume Z-score</span>
+                        <span class="score-badge badge-amber">Exfiltration</span>
+                    </div>
+                    <div class="score-formula">Z = (byte&#x5F;count &minus; &mu;) / &sigma; &nbsp;[population z-score]</div>
+                    <div class="score-track"><div class="score-fill fill-green" id="scoreVolume" style="width:0%"></div></div>
+                    <div class="score-labels"><span>Normal range</span><span>Z&gt;3 (outlier)</span></div>
+                    <div class="score-insight">Exfiltration flows push abnormally large byte totals. Z&gt;3 triggers HIGH_ENTROPY or EXFIL flag. CICIDS2017: Total Fwd Bytes.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROW 5: Feature Extraction Table -->
+        <section class="panel">
+            <div class="panel-header">
+                <h2 class="panel-title">DPI Feature Extraction — Per Flow</h2>
+                <span class="panel-tag">8 Features &middot; Real-time &middot; Zero Lock &middot; NSL-KDD + CICIDS2017</span>
             </div>
             <div class="table-container">
-                <table class="data-table">
+                <table class="data-table feature-table">
                     <thead>
                         <tr>
-                            <th>Source IP</th>
-                            <th>Dest IP</th>
-                            <th>Score</th>
-                            <th>Type</th>
-                            <th>SNI / Domain</th>
-                            <th>Packets</th>
+                            <th>Feature</th>
+                            <th>What It Captures</th>
+                            <th>Attack Signal</th>
+                            <th>Research Dataset</th>
+                            <th>Live Value</th>
                         </tr>
                     </thead>
-                    <tbody id="anomalyTableBody">
-                        <tr><td colspan="6" class="loading-msg">No anomalies detected</td></tr>
+                    <tbody>
+                        <tr>
+                            <td class="feat-name">Packet Count</td>
+                            <td>Number of packets in the flow</td>
+                            <td><span class="tag tag-red">Port Scan (many 1-pkt flows)</span></td>
+                            <td class="feat-ref">NSL-KDD: count</td>
+                            <td class="feat-val" id="fvPackets">-</td>
+                        </tr>
+                        <tr>
+                            <td class="feat-name">Total Bytes</td>
+                            <td>Total volume of data transferred</td>
+                            <td><span class="tag tag-amber">Exfil (abnormally large)</span></td>
+                            <td class="feat-ref">NSL-KDD: num_bytes</td>
+                            <td class="feat-val" id="fvBytes">-</td>
+                        </tr>
+                        <tr>
+                            <td class="feat-name">Avg Packet Size</td>
+                            <td>Mean payload length per packet</td>
+                            <td><span class="tag tag-red">DDoS (all pkts identical)</span></td>
+                            <td class="feat-ref">CICIDS2017: Avg Fwd Seg Size</td>
+                            <td class="feat-val" id="fvAvgSize">-</td>
+                        </tr>
+                        <tr>
+                            <td class="feat-name">Pkt Size Variance</td>
+                            <td>Statistical spread of packet sizes</td>
+                            <td><span class="tag tag-red">DDoS (near-zero variance)</span></td>
+                            <td class="feat-ref">CICIDS2017: Pkt Len Variance</td>
+                            <td class="feat-val" id="fvVariance">-</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td class="feat-name">Shannon Entropy</td>
+                            <td>Byte-level randomness of payload</td>
+                            <td><span class="tag tag-purple">C2 / Tunneling (&ge;7.5 bits)</span></td>
+                            <td class="feat-ref">Bro/Zeek IDS Custom</td>
+                            <td class="feat-val" id="fvEntropy">-</td>
+                        </tr>
+                        <tr>
+                            <td class="feat-name">Flow Duration (ms)</td>
+                            <td>Time from first to last packet</td>
+                            <td><span class="tag tag-red">Port Scan (extremely short)</span></td>
+                            <td class="feat-ref">CICIDS2017: Flow Duration</td>
+                            <td class="feat-val" id="fvDuration">-</td>
+                        </tr>
+                        <tr>
+                            <td class="feat-name">SYN Count</td>
+                            <td>TCP SYN flags observed in flow</td>
+                            <td><span class="tag tag-red">SYN Flood / Port Scan</span></td>
+                            <td class="feat-ref">NSL-KDD: count_syn</td>
+                            <td class="feat-val" id="fvSyn">-</td>
+                        </tr>
+                        <tr>
+                            <td class="feat-name">FIN + RST Count</td>
+                            <td>Graceful &amp; reset termination flags</td>
+                            <td><span class="tag tag-amber">Xmas tree / Scan probes</span></td>
+                            <td class="feat-ref">NSL-KDD: flag features</td>
+                            <td class="feat-val" id="fvFin">-</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Charts Row 2: Histogram -->
-        <section class="panel">
-            <div class="panel-header">
-                <h2 class="panel-title">Application Traffic Histogram</h2>
-                <span class="panel-badge" id="classifiedCount">0 flows classified</span>
-            </div>
-            <div class="panel-body chart-container" style="height: 250px;">
-                <canvas id="appHistogramChart"></canvas>
-            </div>
-        </section>
-
-        <!-- Anomaly Detection Panel -->
-        <section class="panel">
-            <div class="panel-header">
-                <h2 class="panel-title">Anomaly Detection</h2>
-                <span class="panel-badge" id="anomalyBadge">0 anomalies</span>
-            </div>
-            <div class="table-container">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Source IP</th>
-                            <th>Dest IP</th>
-                            <th>Score</th>
-                            <th>Type</th>
-                            <th>SNI</th>
-                            <th>Packets</th>
-                        </tr>
-                    </thead>
-                    <tbody id="anomalyTableBody">
-                        <tr><td colspan="6" class="loading-msg">No anomalies detected</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Data Tables Row -->
-        <section class="tables-grid">
-            <!-- Protocol Breakdown Table -->
-            <div class="panel panel-wide">
+        <!-- ROW 6: App Histogram + Anomaly Table -->
+        <div class="two-col">
+            <div class="panel">
                 <div class="panel-header">
-                    <h2 class="panel-title">Protocol Details</h2>
+                    <h2 class="panel-title">Application Breakdown</h2>
+                    <span class="panel-tag">Layer 7 &middot; TLS SNI / HTTP Host / DNS QNAME</span>
+                </div>
+                <div class="chart-wrap-tall"><canvas id="appHistogramChart"></canvas></div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">Anomaly Detection Log</h2>
+                    <span class="panel-badge" id="anomalyBadge">0 threats</span>
                 </div>
                 <div class="table-container">
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Application</th>
-                                <th>Packets</th>
-                                <th>Traffic Share</th>
-                                <th>Status</th>
+                                <th>Source IP</th>
+                                <th>Dst IP</th>
+                                <th>Score</th>
+                                <th>Type</th>
+                                <th>Pkts</th>
                             </tr>
                         </thead>
-                        <tbody id="protoTableBody">
-                            <tr><td colspan="4" class="loading-msg">Loading data...</td></tr>
+                        <tbody id="anomalyTableBody">
+                            <tr><td colspan="5" class="loading-msg">No anomaly detected</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
 
-            <!-- Detected Domains & Threads -->
-            <div class="side-panels">
-                <div class="panel">
+        <!-- ROW 7: Protocol Table + SNI + Threads -->
+        <div class="three-col">
+            <div class="panel col-wide">
+                <div class="panel-header">
+                    <h2 class="panel-title">Protocol Classification Table</h2>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Application</th><th>Packets</th><th>Share</th><th>Policy</th></tr>
+                        </thead>
+                        <tbody id="protoTableBody">
+                            <tr><td colspan="4" class="loading-msg">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-narrow">
+                <div class="panel" style="margin-bottom:16px">
                     <div class="panel-header">
                         <h2 class="panel-title">Detected Domains</h2>
-                        <span class="panel-badge" id="sniCount">0 domains</span>
+                        <span class="panel-badge" id="sniCount">0</span>
                     </div>
                     <div class="list-container" id="sniList">
                         <div class="loading-msg">Waiting for traffic...</div>
                     </div>
                 </div>
-
                 <div class="panel">
                     <div class="panel-header">
                         <h2 class="panel-title">Thread Pipeline</h2>
@@ -247,39 +314,44 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Features Section -->
-        <section class="features-section">
-            <h2 class="panel-title" style="margin-bottom: 24px; text-align: center;">Engine Architecture & Features</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Wire-Speed Performance</h3>
-                    <p>Multi-threaded pipeline utilizing FastPath architectures to process over 400,000 packets per second with zero-lock contention.</p>
+        <!-- ROW 8: Architecture & Research Block -->
+        <section class="panel arch-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">System Design &amp; Research References</h2>
+            </div>
+            <div class="arch-grid">
+                <div class="arch-card">
+                    <div class="arch-tag">ARCHITECTURE</div>
+                    <h3>Lock-Free FastPath Pipeline</h3>
+                    <p>5-tuple hash guarantees all packets of a given TCP/UDP flow route to the same FastPath thread, eliminating mutex contention on the hot classification path. Per-FastPath flow tables require no synchronization.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
-                    <h3>True Deep Packet Inspection</h3>
-                    <p>Byte-level parsing of TLS SNI extensions, HTTP Host headers, and DNS Query names without relying on external libraries like libpcap.</p>
+                <div class="arch-card">
+                    <div class="arch-tag">PAYLOAD ANALYSIS</div>
+                    <h3>Byte-Level Protocol Parsing</h3>
+                    <p>Walks raw byte buffers to extract TLS Client Hello SNI (extension 0x0000), HTTP/1.x Host headers, and DNS Question Section labels (RFC 1035 label-length walk) with zero external library dependencies.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🧠</div>
-                    <h3>Machine Learning Ready</h3>
-                    <p>Real-time extraction of 8 flow features (including Shannon Entropy and Welford's Variance) for DDoS, Port Scan, and C2 detection.</p>
+                <div class="arch-card">
+                    <div class="arch-tag">ANOMALY DETECTION</div>
+                    <h3>Statistical Scoring Engine</h3>
+                    <p>Shannon entropy H(X) = &minus;&#x2211; p log&#x2082; p and Welford's online variance (O(1) memory) extract features modeled on <strong>NSL-KDD</strong> (Tavallaee et al., 2009) and <strong>CICIDS2017</strong> (Sharafaldin et al., 2018).</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>Dynamic Traffic Control</h3>
-                    <p>Instantly block or throttle specific applications, domains, or IP addresses at the flow level natively in C++17.</p>
+                <div class="arch-card">
+                    <div class="arch-tag">ML PIPELINE</div>
+                    <h3>Offline Random Forest Classifier</h3>
+                    <p>Exports per-flow feature CSV to a Scikit-Learn Random Forest pipeline. Achieves ~97% precision on adversarial synthetic PCAP replay. Feature importance validates CICIDS2017 byte-count and entropy as top predictors.</p>
                 </div>
             </div>
         </section>
+
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
-        <p>Made by <a href="https://github.com/manaskng" target="_blank">Manas</a></p>
+        <div class="footer-inner">
+            <span>PacketSentinel v2.0 &mdash; C++17 &middot; Zero Dependencies &middot; MIT License</span>
+            <span>Built by <a href="https://github.com/manaskng" target="_blank">ManasRaj</a> &middot; <a href="https://github.com/manaskng/PacketSentinel" target="_blank">View on GitHub</a></span>
+        </div>
     </footer>
 
     <script src="dashboard.js"></script>
