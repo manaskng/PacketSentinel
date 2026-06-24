@@ -164,7 +164,7 @@ body {
 /* ---- Pipeline Visualiser --------------------------------------------------- */
 .pipeline-panel .panel-header { border-bottom: none; }
 .pipeline-viz {
-    display: flex; align-items: stretch; gap: 0;
+    display: flex; align-items: flex-start; gap: 0;
     padding: 20px 24px; overflow-x: auto;
 }
 .pipe-stage {
@@ -190,7 +190,7 @@ body {
 .pipe-sub { font-size: 11px; color: var(--text-3); font-family: 'Fira Code', monospace; }
 .pipe-arrow {
     display: flex; align-items: center; padding: 0 4px; color: var(--text-3);
-    font-size: 18px; flex-shrink: 0; align-self: center; margin-top: -30px;
+    font-size: 18px; flex-shrink: 0; align-self: flex-start; margin-top: 8px;
 }
 .pipe-group { display: flex; gap: 6px; }
 
