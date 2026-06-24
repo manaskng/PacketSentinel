@@ -51,6 +51,36 @@ const fmt = n => n >= 1e9 ? (n/1e9).toFixed(1)+'B'
                : n >= 1e3 ? (n/1e3).toFixed(1)+'K'
                : String(n);
 
+// ---- Theme ------------------------------------------------------------------
+const updateChartTheme = () => {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    Chart.defaults.color = isLight ? '#666666' : '#a1a1aa';
+    Chart.defaults.plugins.tooltip.backgroundColor = isLight ? '#ffffff' : '#111111';
+    Chart.defaults.plugins.tooltip.borderColor = isLight ? '#cccccc' : '#333333';
+    Chart.defaults.plugins.tooltip.titleColor = isLight ? '#000' : '#fff';
+    Chart.defaults.plugins.tooltip.bodyColor = isLight ? '#666' : '#a1a1aa';
+    
+    // Update existing charts if they exist
+    if (throughputChart) throughputChart.update();
+    if (doughnutChart) doughnutChart.update();
+    if (histogramChart) histogramChart.update();
+};
+
+const toggleTheme = () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateChartTheme();
+};
+
+// Initialize Theme
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+updateChartTheme();
+
+document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
 // ---- Clock ------------------------------------------------------------------
 setInterval(() => {
     $('headerTime').textContent = new Date().toLocaleTimeString();
@@ -77,6 +107,21 @@ function demoStats() {
         detected_snis: [
             'www.youtube.com', 'api.tiktok.com', 'www.netflix.com',
             'github.com', 'discord.com', 'www.twitter.com', 'api.example.com'
+        ],
+        total_anomalies: 42,
+        anomaly_breakdown: {
+            PORT_SCAN: 12,
+            DDOS_SUSPECT: 8,
+            DATA_EXFILTRATION: 5,
+            HIGH_ENTROPY: 15,
+            PROTOCOL_ANOMALY: 2
+        },
+        top_anomalies: [
+            { src: '10.0.0.5',    dst: '203.0.113.42',  score: 0.97, type: 'PORT_SCAN',          sni: '',                   pkts: 847  },
+            { src: '192.168.1.8', dst: '198.51.100.10', score: 0.91, type: 'DDOS_SUSPECT',       sni: '',                   pkts: 12450 },
+            { src: '10.0.0.23',   dst: '45.33.32.156',  score: 0.85, type: 'DATA_EXFILTRATION',  sni: 'exfil.darknet.io',   pkts: 234  },
+            { src: '172.16.0.44', dst: '104.26.10.78',  score: 0.78, type: 'HIGH_ENTROPY',       sni: 'cdn.suspect.com',    pkts: 56   },
+            { src: '10.0.0.99',   dst: '192.0.2.1',     score: 0.62, type: 'PROTOCOL_ANOMALY',   sni: '',                   pkts: 18   }
         ]
     };
 }
@@ -192,6 +237,12 @@ function initCharts() {
 
 // ---- Update UI --------------------------------------------------------------
 function updateDashboard(stats) {
+    // Hide loading screen
+    const loader = $('loadingScreen');
+    if (loader && !loader.classList.contains('hidden')) {
+        loader.classList.add('hidden');
+    }
+
     // Top Metrics
     $('totalPackets').textContent = fmt(stats.total_packets || 0);
     $('forwarded').textContent    = fmt(stats.forwarded     || 0);
@@ -265,6 +316,44 @@ function updateDashboard(stats) {
                 <div class="list-item-sub">TLS SNI</div>
             </div>
         `).join('');
+    }
+
+    // ---- Anomaly Detection ----
+    const totalAnomalies = stats.total_anomalies || 0;
+    $('anomalyCount').textContent = fmt(totalAnomalies);
+
+    // Footer: show dominant anomaly type
+    const breakdown = stats.anomaly_breakdown || {};
+    const breakdownEntries = Object.entries(breakdown).sort((a, b) => b[1] - a[1]);
+    if (breakdownEntries.length > 0) {
+        const [topType, topCount] = breakdownEntries[0];
+        $('anomalyType').textContent = topType.replace(/_/g, ' ').toLowerCase() + ' (' + topCount + ' hits)';
+    } else {
+        $('anomalyType').textContent = 'no anomalies';
+    }
+
+    // Badge
+    $('anomalyBadge').textContent = totalAnomalies + ' anomal' + (totalAnomalies === 1 ? 'y' : 'ies');
+
+    // Anomaly Table
+    const anomalies = stats.top_anomalies || [];
+    const anomalyTbody = $('anomalyTableBody');
+    if (anomalies.length === 0) {
+        anomalyTbody.innerHTML = '<tr><td colspan="6" class="loading-msg">No anomalies detected</td></tr>';
+    } else {
+        anomalyTbody.innerHTML = anomalies.map(a => {
+            const scorePct = (a.score * 100).toFixed(0) + '%';
+            const typeLabel = a.type.replace(/_/g, ' ');
+            const sniDisplay = a.sni || '—';
+            return `<tr>
+                <td style="font-family:var(--font-mono);color:var(--text-primary)">${a.src}</td>
+                <td style="font-family:var(--font-mono);color:var(--text-primary)">${a.dst}</td>
+                <td><span class="anomaly-score">${scorePct}</span></td>
+                <td><span class="status-pill status-anomaly">${typeLabel}</span></td>
+                <td style="font-family:var(--font-mono)">${sniDisplay}</td>
+                <td style="font-family:var(--font-mono)">${fmt(a.pkts)}</td>
+            </tr>`;
+        }).join('');
     }
 
     // Update Thread Stats (Mock LB/FP distribution for visual)
