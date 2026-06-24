@@ -27,6 +27,7 @@
 #include "thread_safe_queue.h"
 #include "rule_manager.h"
 #include "sni_extractor.h"
+#include "flow_analyzer.h"
 #include <unordered_map>
 #include <thread>
 #include <atomic>
@@ -60,6 +61,7 @@ public:
     uint64_t forwarded()  const { return forwarded_.load();  }
     uint64_t dropped()    const { return dropped_.load();    }
     uint64_t classified() const { return classified_.load(); }
+    uint64_t anomalies()  const { return anomalies_.load();  }
 
     int id() const { return id_; }
 
@@ -93,6 +95,7 @@ private:
     std::atomic<uint64_t> forwarded_{0};
     std::atomic<uint64_t> dropped_{0};
     std::atomic<uint64_t> classified_{0};
+    std::atomic<uint64_t> anomalies_{0};
 };
 
 #endif // DPI_FAST_PATH_H

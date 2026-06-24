@@ -112,6 +112,21 @@ std::string appTypeToString(AppType app) {
 }
 
 // ---------------------------------------------------------------------------
+// anomalyTypeToString -- human-readable anomaly type for reports
+// ---------------------------------------------------------------------------
+std::string anomalyTypeToString(AnomalyType t) {
+    switch (t) {
+        case AnomalyType::NONE:              return "NONE";
+        case AnomalyType::PORT_SCAN:         return "PORT_SCAN";
+        case AnomalyType::DDOS_SUSPECT:      return "DDOS_SUSPECT";
+        case AnomalyType::DATA_EXFILTRATION: return "DATA_EXFILTRATION";
+        case AnomalyType::HIGH_ENTROPY:      return "HIGH_ENTROPY";
+        case AnomalyType::PROTOCOL_ANOMALY:  return "PROTOCOL_ANOMALY";
+        default:                             return "UNKNOWN";
+    }
+}
+
+// ---------------------------------------------------------------------------
 // ipToString — convert packed uint32_t to "x.x.x.x" dotted-quad notation
 // Network byte order (big-endian) input
 // ---------------------------------------------------------------------------

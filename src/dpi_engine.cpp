@@ -5,6 +5,7 @@
 #include "dpi_engine.h"
 #include "pcap_reader.h"
 #include "packet_parser.h"
+#include "flow_analyzer.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -153,7 +154,32 @@ AggregatedStats DPIEngine::run() {
                 jf << "\"" << agg.detected_snis[i] << "\"";
                 if (i + 1 < agg.detected_snis.size()) jf << ", ";
             }
-            jf << "]\n}\n";
+            jf << "],\n";
+            // Anomaly detection stats
+            jf << "  \"total_anomalies\": " << agg.total_anomalies << ",\n";
+            jf << "  \"anomaly_breakdown\": {\n";
+            {
+                size_t idx = 0;
+                for (const auto& kv : agg.anomaly_breakdown) {
+                    jf << "    \"" << kv.first << "\": " << kv.second;
+                    if (++idx < agg.anomaly_breakdown.size()) jf << ",";
+                    jf << "\n";
+                }
+            }
+            jf << "  },\n";
+            jf << "  \"top_anomalies\": [\n";
+            for (size_t i = 0; i < agg.top_anomalies.size(); ++i) {
+                const auto& af = agg.top_anomalies[i];
+                jf << "    {\"src\": \"" << af.src_ip
+                   << "\", \"dst\": \""  << af.dst_ip
+                   << "\", \"score\": "  << std::fixed << std::setprecision(3) << af.score
+                   << ", \"type\": \""   << af.type
+                   << "\", \"sni\": \""  << af.sni
+                   << "\", \"pkts\": "   << af.packet_count << "}";
+                if (i + 1 < agg.top_anomalies.size()) jf << ",";
+                jf << "\n";
+            }
+            jf << "  ]\n}\n";
             std::cout << "[Engine] Stats written to " << config_.stats_json_file << "\n";
         }
     }
@@ -229,6 +255,14 @@ AggregatedStats DPIEngine::collectStats(double elapsed_sec,
     std::map<AppType, uint64_t> app_totals;
     std::set<std::string> all_snis;
 
+    // Temporary storage for all anomalous flows (sorted later)
+    struct ScoredFlow {
+        std::string src_ip, dst_ip, sni, anom_type;
+        double score;
+        uint64_t pkt_count;
+    };
+    std::vector<ScoredFlow> all_anomalous;
+
     for (size_t i = 0; i < fps_.size(); ++i) {
         s.fp_processed[i] = fps_[i]->processed();
         s.fp_forwarded[i] = fps_[i]->forwarded();
@@ -241,6 +275,22 @@ AggregatedStats DPIEngine::collectStats(double elapsed_sec,
             const Flow& flow = kv.second;
             app_totals[flow.app_type] += flow.packet_count;
             if (!flow.sni.empty()) all_snis.insert(flow.sni);
+
+            // Collect anomaly data
+            if (flow.anomaly_score >= FlowAnalyzer::FLAG_THRESHOLD) {
+                std::string type_str = anomalyTypeToString(flow.anomaly_type);
+                s.anomaly_breakdown[type_str]++;
+                s.total_anomalies++;
+
+                all_anomalous.push_back({
+                    ipToString(flow.src_ip),
+                    ipToString(flow.dst_ip),
+                    flow.sni,
+                    type_str,
+                    flow.anomaly_score,
+                    flow.packet_count
+                });
+            }
         }
     }
 
@@ -254,6 +304,22 @@ AggregatedStats DPIEngine::collectStats(double elapsed_sec,
               [](const auto& a, const auto& b) { return a.second > b.second; });
 
     s.detected_snis.assign(all_snis.begin(), all_snis.end());
+
+    // Sort anomalous flows by score descending, keep top 10
+    std::sort(all_anomalous.begin(), all_anomalous.end(),
+              [](const ScoredFlow& a, const ScoredFlow& b) { return a.score > b.score; });
+    size_t top_n = std::min(all_anomalous.size(), (size_t)10);
+    for (size_t i = 0; i < top_n; ++i) {
+        s.top_anomalies.push_back({
+            all_anomalous[i].src_ip,
+            all_anomalous[i].dst_ip,
+            all_anomalous[i].score,
+            all_anomalous[i].anom_type,
+            all_anomalous[i].sni,
+            all_anomalous[i].pkt_count
+        });
+    }
+
     return s;
 }
 
@@ -342,6 +408,37 @@ void DPIEngine::printReport(const AggregatedStats& s, const DPIConfig& cfg,
             if ((int)label.size() > 44) label = label.substr(0, 42) + "..";
             row(label, "-> " + appTypeToString(app) + (blk ? " [BLOCKED]" : ""));
         }
+        sep();
+    }
+
+    // Anomaly Detection Report
+    if (s.total_anomalies > 0) {
+        section("ANOMALY DETECTION REPORT");
+        {
+            std::ostringstream oss;
+            oss << s.total_anomalies << " flows flagged";
+            row("Total Anomalies", oss.str());
+        }
+        for (const auto& kv : s.anomaly_breakdown) {
+            row("  " + kv.first, std::to_string(kv.second) + " flows");
+        }
+        hline();
+        section("TOP ANOMALOUS FLOWS");
+        for (const auto& af : s.top_anomalies) {
+            std::ostringstream lbl;
+            lbl << std::left << std::setw(16) << af.src_ip
+                << " -> " << std::setw(16) << af.dst_ip;
+            std::ostringstream val;
+            val << af.type << " score="
+                << std::fixed << std::setprecision(2) << af.score
+                << " pkts=" << af.packet_count;
+            if (!af.sni.empty()) val << " sni=" << af.sni;
+            row(lbl.str(), val.str());
+        }
+        sep();
+    } else {
+        section("ANOMALY DETECTION REPORT");
+        row("Status", "No anomalies detected");
         sep();
     }
     std::cout << "\n";

@@ -1,418 +1,2092 @@
 {
-  "192.168.1.101:51080->203.0.113.66:443": {
-    "sni": "www.tiktok.com",
-    "http_host": null,
-    "app": "TikTok",
-    "type": "tls",
-    "packet_count": 8
-  },
-  "192.168.1.100:62536->203.0.113.32:443": {
-    "sni": "www.instagram.com",
-    "http_host": null,
-    "app": "Instagram",
-    "type": "tls",
-    "packet_count": 7
-  },
-  "192.168.1.100:56718->203.0.113.73:443": {
-    "sni": "www.reddit.com",
-    "http_host": null,
-    "app": "Reddit",
-    "type": "tls",
-    "packet_count": 10
-  },
-  "192.168.1.100:63808->203.0.113.72:443": {
-    "sni": "www.netflix.com",
-    "http_host": null,
-    "app": "Netflix",
-    "type": "tls",
-    "packet_count": 8
-  },
-  "192.168.1.101:57275->203.0.113.81:443": {
-    "sni": "www.youtube.com",
-    "http_host": null,
-    "app": "YouTube",
-    "type": "tls",
-    "packet_count": 8
-  },
-  "192.168.1.100:55697->203.0.113.70:443": {
-    "sni": "www.google.com",
-    "http_host": null,
-    "app": "Google",
-    "type": "tls",
-    "packet_count": 10
-  },
-  "192.168.1.100:58613->203.0.113.27:443": {
-    "sni": "www.twitch.tv",
-    "http_host": null,
-    "app": "Twitch",
-    "type": "tls",
-    "packet_count": 9
-  },
-  "192.168.1.101:54038->203.0.113.88:443": {
-    "sni": "www.twitter.com",
-    "http_host": null,
-    "app": "Twitter",
-    "type": "tls",
-    "packet_count": 8
-  },
-  "192.168.1.100:55640->203.0.113.23:443": {
-    "sni": "www.tiktok.com",
-    "http_host": null,
-    "app": "TikTok",
-    "type": "tls",
-    "packet_count": 9
-  },
-  "192.168.1.100:62036->203.0.113.71:443": {
+  "192.168.1.100:62610->203.0.113.13:443": {
     "sni": "www.facebook.com",
     "http_host": null,
     "app": "Facebook",
     "type": "tls",
-    "packet_count": 7
+    "packet_count": 8,
+    "anomaly": null
   },
-  "192.168.1.100:62648->8.8.8.8:53": {
+  "192.168.1.100:53097->203.0.113.74:443": {
+    "sni": "discord.com",
+    "http_host": null,
+    "app": "Discord",
+    "type": "tls",
+    "packet_count": 7,
+    "anomaly": null
+  },
+  "192.168.1.100:65343->203.0.113.33:443": {
+    "sni": "www.twitch.tv",
+    "http_host": null,
+    "app": "Twitch",
+    "type": "tls",
+    "packet_count": 9,
+    "anomaly": null
+  },
+  "192.168.1.100:52042->203.0.113.70:443": {
+    "sni": "www.twitch.tv",
+    "http_host": null,
+    "app": "Twitch",
+    "type": "tls",
+    "packet_count": 10,
+    "anomaly": null
+  },
+  "192.168.1.100:60402->203.0.113.82:80": {
+    "sni": null,
+    "http_host": "example.com",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 7,
+    "anomaly": null
+  },
+  "192.168.1.100:60171->203.0.113.16:443": {
+    "sni": "www.facebook.com",
+    "http_host": null,
+    "app": "Facebook",
+    "type": "tls",
+    "packet_count": 7,
+    "anomaly": null
+  },
+  "192.168.1.100:60664->203.0.113.49:443": {
+    "sni": "www.instagram.com",
+    "http_host": null,
+    "app": "Instagram",
+    "type": "tls",
+    "packet_count": 7,
+    "anomaly": null
+  },
+  "192.168.1.100:59711->203.0.113.40:443": {
+    "sni": "discord.com",
+    "http_host": null,
+    "app": "Discord",
+    "type": "tls",
+    "packet_count": 8,
+    "anomaly": null
+  },
+  "192.168.1.100:63773->203.0.113.68:80": {
+    "sni": null,
+    "http_host": "api.example.com",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 10,
+    "anomaly": null
+  },
+  "192.168.1.100:51627->203.0.113.27:443": {
+    "sni": "www.github.com",
+    "http_host": null,
+    "app": "GitHub",
+    "type": "tls",
+    "packet_count": 7,
+    "anomaly": null
+  },
+  "192.168.1.100:49444->203.0.113.3:443": {
+    "sni": "www.google.com",
+    "http_host": null,
+    "app": "Google",
+    "type": "tls",
+    "packet_count": 8,
+    "anomaly": null
+  },
+  "192.168.1.100:62201->203.0.113.62:443": {
+    "sni": "www.whatsapp.com",
+    "http_host": null,
+    "app": "WhatsApp",
+    "type": "tls",
+    "packet_count": 8,
+    "anomaly": null
+  },
+  "192.168.1.100:59521->203.0.113.10:443": {
+    "sni": "www.google.com",
+    "http_host": null,
+    "app": "Google",
+    "type": "tls",
+    "packet_count": 7,
+    "anomaly": null
+  },
+  "192.168.1.100:63337->203.0.113.80:443": {
+    "sni": "www.twitch.tv",
+    "http_host": null,
+    "app": "Twitch",
+    "type": "tls",
+    "packet_count": 8,
+    "anomaly": null
+  },
+  "192.168.1.101:53375->203.0.113.10:443": {
+    "sni": "www.instagram.com",
+    "http_host": null,
+    "app": "Instagram",
+    "type": "tls",
+    "packet_count": 7,
+    "anomaly": null
+  },
+  "192.168.1.100:64848->203.0.113.5:443": {
+    "sni": "www.twitter.com",
+    "http_host": null,
+    "app": "Twitter",
+    "type": "tls",
+    "packet_count": 7,
+    "anomaly": null
+  },
+  "192.168.1.100:63205->203.0.113.5:443": {
+    "sni": "www.reddit.com",
+    "http_host": null,
+    "app": "Reddit",
+    "type": "tls",
+    "packet_count": 8,
+    "anomaly": null
+  },
+  "192.168.1.101:58531->203.0.113.89:443": {
+    "sni": "www.youtube.com",
+    "http_host": null,
+    "app": "YouTube",
+    "type": "tls",
+    "packet_count": 9,
+    "anomaly": null
+  },
+  "192.168.1.101:52852->203.0.113.29:8080": {
+    "sni": null,
+    "http_host": "cdn.example.org",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 9,
+    "anomaly": null
+  },
+  "192.168.1.100:53454->203.0.113.47:443": {
+    "sni": "www.twitch.tv",
+    "http_host": null,
+    "app": "Twitch",
+    "type": "tls",
+    "packet_count": 9,
+    "anomaly": null
+  },
+  "192.168.1.101:60129->203.0.113.33:443": {
+    "sni": "www.whatsapp.com",
+    "http_host": null,
+    "app": "WhatsApp",
+    "type": "tls",
+    "packet_count": 10,
+    "anomaly": null
+  },
+  "192.168.1.101:57648->203.0.113.69:443": {
+    "sni": "www.github.com",
+    "http_host": null,
+    "app": "GitHub",
+    "type": "tls",
+    "packet_count": 7,
+    "anomaly": null
+  },
+  "192.168.1.101:55616->8.8.8.8:53": {
+    "dns_query": "www.youtube.com",
+    "app": "DNS",
+    "type": "dns",
+    "packet_count": 1,
+    "anomaly": null
+  },
+  "192.168.1.100:52746->203.0.113.56:80": {
+    "sni": null,
+    "http_host": "example.com",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 8,
+    "anomaly": null
+  },
+  "192.168.1.100:51066->203.0.113.77:443": {
+    "sni": "www.instagram.com",
+    "http_host": null,
+    "app": "Instagram",
+    "type": "tls",
+    "packet_count": 9,
+    "anomaly": null
+  },
+  "192.168.1.100:52758->203.0.113.59:443": {
+    "sni": "www.github.com",
+    "http_host": null,
+    "app": "GitHub",
+    "type": "tls",
+    "packet_count": 10,
+    "anomaly": null
+  },
+  "192.168.1.101:52505->8.8.8.8:53": {
     "dns_query": "github.com",
     "app": "DNS",
     "type": "dns",
-    "packet_count": 1
+    "packet_count": 1,
+    "anomaly": null
   },
-  "192.168.1.101:50919->203.0.113.22:443": {
-    "sni": "discord.com",
+  "192.168.1.101:51130->203.0.113.9:443": {
+    "sni": "www.reddit.com",
     "http_host": null,
-    "app": "Discord",
+    "app": "Reddit",
     "type": "tls",
-    "packet_count": 9
+    "packet_count": 10,
+    "anomaly": null
   },
-  "192.168.1.101:49610->203.0.113.66:443": {
-    "sni": "www.youtube.com",
-    "http_host": null,
-    "app": "YouTube",
-    "type": "tls",
-    "packet_count": 8
-  },
-  "192.168.1.100:50619->203.0.113.14:80": {
-    "sni": null,
-    "http_host": "api.example.com",
-    "app": "HTTP",
-    "type": "http",
-    "packet_count": 9
-  },
-  "192.168.1.101:51877->203.0.113.17:443": {
-    "sni": "www.whatsapp.com",
-    "http_host": null,
-    "app": "WhatsApp",
-    "type": "tls",
-    "packet_count": 7
-  },
-  "192.168.1.101:64534->203.0.113.48:443": {
-    "sni": "www.youtube.com",
-    "http_host": null,
-    "app": "YouTube",
-    "type": "tls",
-    "packet_count": 9
-  },
-  "192.168.1.100:53052->203.0.113.91:443": {
+  "192.168.1.101:52157->203.0.113.94:443": {
     "sni": "www.instagram.com",
     "http_host": null,
     "app": "Instagram",
     "type": "tls",
-    "packet_count": 9
+    "packet_count": 10,
+    "anomaly": null
   },
-  "192.168.1.101:58786->203.0.113.22:443": {
+  "192.168.1.100:55508->203.0.113.69:80": {
+    "sni": null,
+    "http_host": "api.example.com",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 9,
+    "anomaly": null
+  },
+  "192.168.1.100:55563->203.0.113.27:443": {
+    "sni": "www.instagram.com",
+    "http_host": null,
+    "app": "Instagram",
+    "type": "tls",
+    "packet_count": 10,
+    "anomaly": null
+  },
+  "192.168.1.101:50925->203.0.113.31:443": {
     "sni": "www.google.com",
     "http_host": null,
     "app": "Google",
     "type": "tls",
-    "packet_count": 7
+    "packet_count": 8,
+    "anomaly": null
   },
-  "192.168.1.101:57786->203.0.113.3:443": {
-    "sni": "www.google.com",
+  "192.168.1.101:59867->203.0.113.53:80": {
+    "sni": null,
+    "http_host": "api.example.com",
+    "app": "HTTP",
+    "type": "http",
+    "packet_count": 10,
+    "anomaly": null
+  },
+  "192.168.1.101:51643->203.0.113.48:443": {
+    "sni": "www.github.com",
     "http_host": null,
-    "app": "Google",
+    "app": "GitHub",
     "type": "tls",
-    "packet_count": 8
+    "packet_count": 8,
+    "anomaly": null
   },
-  "192.168.1.100:64196->8.8.8.8:53": {
-    "dns_query": "www.netflix.com",
-    "app": "DNS",
-    "type": "dns",
-    "packet_count": 1
-  },
-  "192.168.1.101:56532->203.0.113.57:443": {
-    "sni": "www.google.com",
+  "192.168.1.100:56989->203.0.113.8:443": {
+    "sni": "www.youtube.com",
     "http_host": null,
-    "app": "Google",
+    "app": "YouTube",
     "type": "tls",
-    "packet_count": 7
+    "packet_count": 8,
+    "anomaly": null
   },
-  "192.168.1.100:58411->203.0.113.51:443": {
-    "sni": "www.twitter.com",
-    "http_host": null,
-    "app": "Twitter",
-    "type": "tls",
-    "packet_count": 7
-  },
-  "192.168.1.100:56974->203.0.113.60:443": {
-    "sni": "www.tiktok.com",
-    "http_host": null,
-    "app": "TikTok",
-    "type": "tls",
-    "packet_count": 7
-  },
-  "192.168.1.101:54387->203.0.113.15:80": {
+  "192.168.1.101:59238->203.0.113.5:80": {
     "sni": null,
     "http_host": "example.com",
     "app": "HTTP",
     "type": "http",
-    "packet_count": 10
+    "packet_count": 8,
+    "anomaly": null
   },
-  "192.168.1.100:57393->8.8.8.8:53": {
+  "192.168.1.101:50022->203.0.113.81:443": {
+    "sni": "www.github.com",
+    "http_host": null,
+    "app": "GitHub",
+    "type": "tls",
+    "packet_count": 8,
+    "anomaly": null
+  },
+  "192.168.1.100:55760->203.0.113.34:443": {
+    "sni": "www.google.com",
+    "http_host": null,
+    "app": "Google",
+    "type": "tls",
+    "packet_count": 8,
+    "anomaly": null
+  },
+  "192.168.1.101:63602->203.0.113.41:443": {
+    "sni": "www.google.com",
+    "http_host": null,
+    "app": "Google",
+    "type": "tls",
+    "packet_count": 10,
+    "anomaly": null
+  },
+  "192.168.1.100:59140->8.8.8.8:53": {
     "dns_query": "api.tiktok.com",
     "app": "DNS",
     "type": "dns",
-    "packet_count": 1
+    "packet_count": 1,
+    "anomaly": null
   },
-  "192.168.1.100:60316->203.0.113.70:443": {
+  "192.168.1.101:63201->8.8.8.8:53": {
+    "dns_query": "www.reddit.com",
+    "app": "DNS",
+    "type": "dns",
+    "packet_count": 1,
+    "anomaly": null
+  },
+  "192.168.1.101:51308->8.8.8.8:53": {
+    "dns_query": "www.reddit.com",
+    "app": "DNS",
+    "type": "dns",
+    "packet_count": 1,
+    "anomaly": null
+  },
+  "192.168.1.101:63168->203.0.113.79:443": {
     "sni": "www.twitch.tv",
     "http_host": null,
     "app": "Twitch",
     "type": "tls",
-    "packet_count": 8
+    "packet_count": 10,
+    "anomaly": null
   },
-  "192.168.1.101:62704->203.0.113.52:443": {
-    "sni": "www.netflix.com",
-    "http_host": null,
-    "app": "Netflix",
-    "type": "tls",
-    "packet_count": 10
-  },
-  "192.168.1.101:62760->203.0.113.10:443": {
-    "sni": "www.youtube.com",
-    "http_host": null,
-    "app": "YouTube",
-    "type": "tls",
-    "packet_count": 8
-  },
-  "192.168.1.101:52588->203.0.113.45:443": {
-    "sni": "www.facebook.com",
-    "http_host": null,
-    "app": "Facebook",
-    "type": "tls",
-    "packet_count": 10
-  },
-  "192.168.1.100:52256->203.0.113.12:443": {
-    "sni": "www.reddit.com",
-    "http_host": null,
-    "app": "Reddit",
-    "type": "tls",
-    "packet_count": 8
-  },
-  "192.168.1.101:62439->203.0.113.31:443": {
-    "sni": "www.github.com",
-    "http_host": null,
-    "app": "GitHub",
-    "type": "tls",
-    "packet_count": 10
-  },
-  "192.168.1.101:58705->203.0.113.46:8080": {
-    "sni": null,
-    "http_host": "cdn.example.org",
-    "app": "HTTP",
-    "type": "http",
-    "packet_count": 8
-  },
-  "192.168.1.100:51823->8.8.8.8:53": {
-    "dns_query": "www.netflix.com",
-    "app": "DNS",
-    "type": "dns",
-    "packet_count": 1
-  },
-  "192.168.1.101:49497->203.0.113.42:8080": {
-    "sni": null,
-    "http_host": "cdn.example.org",
-    "app": "HTTP",
-    "type": "http",
-    "packet_count": 8
-  },
-  "192.168.1.100:62840->203.0.113.44:443": {
-    "sni": "www.whatsapp.com",
-    "http_host": null,
-    "app": "WhatsApp",
-    "type": "tls",
-    "packet_count": 9
-  },
-  "192.168.1.101:52548->203.0.113.17:443": {
-    "sni": "www.youtube.com",
-    "http_host": null,
-    "app": "YouTube",
-    "type": "tls",
-    "packet_count": 9
-  },
-  "192.168.1.101:62066->203.0.113.2:80": {
-    "sni": null,
-    "http_host": "api.example.com",
-    "app": "HTTP",
-    "type": "http",
-    "packet_count": 7
-  },
-  "192.168.1.100:64397->203.0.113.3:443": {
-    "sni": "www.netflix.com",
-    "http_host": null,
-    "app": "Netflix",
-    "type": "tls",
-    "packet_count": 10
-  },
-  "192.168.1.100:57840->203.0.113.38:443": {
-    "sni": "www.youtube.com",
-    "http_host": null,
-    "app": "YouTube",
-    "type": "tls",
-    "packet_count": 7
-  },
-  "192.168.1.100:58145->203.0.113.64:443": {
-    "sni": "www.github.com",
-    "http_host": null,
-    "app": "GitHub",
-    "type": "tls",
-    "packet_count": 9
-  },
-  "192.168.1.101:54988->203.0.113.75:443": {
+  "192.168.1.100:54005->203.0.113.44:443": {
     "sni": "discord.com",
     "http_host": null,
     "app": "Discord",
     "type": "tls",
-    "packet_count": 8
+    "packet_count": 9,
+    "anomaly": null
   },
-  "192.168.1.100:57416->203.0.113.78:443": {
-    "sni": "www.youtube.com",
+  "192.168.1.100:55649->203.0.113.74:443": {
+    "sni": "www.whatsapp.com",
     "http_host": null,
-    "app": "YouTube",
+    "app": "WhatsApp",
     "type": "tls",
-    "packet_count": 7
+    "packet_count": 7,
+    "anomaly": null
   },
-  "192.168.1.100:59337->203.0.113.30:443": {
-    "sni": "www.reddit.com",
+  "192.168.1.100:58637->8.8.8.8:53": {
+    "dns_query": "www.youtube.com",
+    "app": "DNS",
+    "type": "dns",
+    "packet_count": 1,
+    "anomaly": null
+  },
+  "192.168.1.100:52194->203.0.113.58:443": {
+    "sni": "www.facebook.com",
     "http_host": null,
-    "app": "Reddit",
+    "app": "Facebook",
     "type": "tls",
-    "packet_count": 10
+    "packet_count": 8,
+    "anomaly": null
   },
-  "192.168.1.100:62233->203.0.113.91:443": {
-    "sni": "www.youtube.com",
-    "http_host": null,
-    "app": "YouTube",
-    "type": "tls",
-    "packet_count": 10
-  },
-  "192.168.1.101:62306->203.0.113.19:443": {
-    "sni": "www.google.com",
-    "http_host": null,
-    "app": "Google",
-    "type": "tls",
-    "packet_count": 8
-  },
-  "192.168.1.101:56837->203.0.113.63:443": {
-    "sni": "www.netflix.com",
-    "http_host": null,
-    "app": "Netflix",
-    "type": "tls",
-    "packet_count": 9
-  },
-  "192.168.1.100:54671->203.0.113.57:80": {
-    "sni": null,
-    "http_host": "example.com",
-    "app": "HTTP",
-    "type": "http",
-    "packet_count": 8
-  },
-  "192.168.1.100:56670->203.0.113.15:443": {
-    "sni": "www.twitter.com",
-    "http_host": null,
-    "app": "Twitter",
-    "type": "tls",
-    "packet_count": 10
-  },
-  "192.168.1.100:62157->203.0.113.51:443": {
+  "192.168.1.100:49689->203.0.113.65:443": {
     "sni": "www.instagram.com",
     "http_host": null,
     "app": "Instagram",
     "type": "tls",
-    "packet_count": 7
+    "packet_count": 10,
+    "anomaly": null
   },
-  "192.168.1.100:50681->203.0.113.47:443": {
-    "sni": "www.google.com",
+  "192.168.1.101:57291->203.0.113.3:443": {
+    "sni": "www.tiktok.com",
     "http_host": null,
-    "app": "Google",
+    "app": "TikTok",
     "type": "tls",
-    "packet_count": 7
+    "packet_count": 8,
+    "anomaly": null
   },
-  "192.168.1.50:57344->203.0.113.32:443": {
+  "192.168.1.100:52257->203.0.113.2:443": {
+    "sni": "www.twitch.tv",
+    "http_host": null,
+    "app": "Twitch",
+    "type": "tls",
+    "packet_count": 10,
+    "anomaly": null
+  },
+  "192.168.1.50:65510->203.0.113.47:443": {
     "sni": "www.youtube.com",
     "http_host": null,
     "app": "YouTube",
     "type": "tls",
-    "packet_count": 10
+    "packet_count": 7,
+    "anomaly": null
   },
-  "192.168.1.50:50601->203.0.113.42:443": {
+  "192.168.1.50:49757->203.0.113.18:443": {
     "sni": "www.youtube.com",
     "http_host": null,
     "app": "YouTube",
     "type": "tls",
-    "packet_count": 7
+    "packet_count": 9,
+    "anomaly": null
   },
-  "192.168.1.50:54518->203.0.113.64:443": {
+  "192.168.1.50:61683->203.0.113.62:443": {
     "sni": "www.youtube.com",
     "http_host": null,
     "app": "YouTube",
     "type": "tls",
-    "packet_count": 10
+    "packet_count": 9,
+    "anomaly": null
   },
-  "192.168.1.50:57714->203.0.113.54:443": {
+  "192.168.1.50:49724->203.0.113.61:443": {
     "sni": "www.youtube.com",
     "http_host": null,
     "app": "YouTube",
     "type": "tls",
-    "packet_count": 9
+    "packet_count": 10,
+    "anomaly": null
   },
-  "192.168.1.50:50154->203.0.113.73:443": {
+  "192.168.1.50:55380->203.0.113.40:443": {
     "sni": "www.youtube.com",
     "http_host": null,
     "app": "YouTube",
     "type": "tls",
-    "packet_count": 10
+    "packet_count": 7,
+    "anomaly": null
   },
-  "192.168.1.50:53447->203.0.113.57:443": {
+  "192.168.1.50:58742->203.0.113.100:443": {
     "sni": "www.youtube.com",
     "http_host": null,
     "app": "YouTube",
     "type": "tls",
-    "packet_count": 8
+    "packet_count": 7,
+    "anomaly": null
   },
-  "192.168.1.50:62106->203.0.113.54:443": {
+  "192.168.1.50:60519->203.0.113.60:443": {
     "sni": "www.youtube.com",
     "http_host": null,
     "app": "YouTube",
     "type": "tls",
-    "packet_count": 10
+    "packet_count": 7,
+    "anomaly": null
   },
-  "192.168.1.50:54073->203.0.113.61:443": {
+  "192.168.1.50:60084->203.0.113.100:443": {
     "sni": "www.youtube.com",
     "http_host": null,
     "app": "YouTube",
     "type": "tls",
-    "packet_count": 9
+    "packet_count": 9,
+    "anomaly": null
   },
-  "192.168.1.50:52215->203.0.113.72:443": {
+  "192.168.1.50:58395->203.0.113.90:443": {
     "sni": "www.youtube.com",
     "http_host": null,
     "app": "YouTube",
     "type": "tls",
-    "packet_count": 9
+    "packet_count": 9,
+    "anomaly": null
   },
-  "192.168.1.50:57051->203.0.113.49:443": {
+  "192.168.1.50:62647->203.0.113.27:443": {
     "sni": "www.youtube.com",
     "http_host": null,
     "app": "YouTube",
     "type": "tls",
-    "packet_count": 8
+    "packet_count": 9,
+    "anomaly": null
+  },
+  "10.99.99.1:49446->203.0.113.200:918": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60601->203.0.113.200:529": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:54936->203.0.113.200:423": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64723->203.0.113.200:1023": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64511->203.0.113.200:504": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60978->203.0.113.200:8": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51544->203.0.113.200:85": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:58927->203.0.113.200:1017": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62039->203.0.113.200:984": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52329->203.0.113.200:250": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60467->203.0.113.200:977": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51779->203.0.113.200:187": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64905->203.0.113.200:897": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50723->203.0.113.200:572": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51580->203.0.113.200:287": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:56471->203.0.113.200:82": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62306->203.0.113.200:41": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50880->203.0.113.200:464": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:58474->203.0.113.200:365": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51079->203.0.113.200:557": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64887->203.0.113.200:829": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:61676->203.0.113.200:10": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62689->203.0.113.200:269": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50026->203.0.113.200:445": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59824->203.0.113.200:672": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:56679->203.0.113.200:941": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:54002->203.0.113.200:204": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:49257->203.0.113.200:805": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:57072->203.0.113.200:465": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50447->203.0.113.200:703": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55033->203.0.113.200:945": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60544->203.0.113.200:900": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:54487->203.0.113.200:973": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:61889->203.0.113.200:59": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:63199->203.0.113.200:65": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:54731->203.0.113.200:775": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62860->203.0.113.200:80": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51419->203.0.113.200:163": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60311->203.0.113.200:143": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50443->203.0.113.200:334": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51988->203.0.113.200:657": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52027->203.0.113.200:453": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53222->203.0.113.200:645": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:63455->203.0.113.200:226": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:61074->203.0.113.200:828": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59700->203.0.113.200:727": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55389->203.0.113.200:579": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:65370->203.0.113.200:179": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59288->203.0.113.200:520": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:56687->203.0.113.200:975": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52488->203.0.113.200:411": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:56125->203.0.113.200:755": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64447->203.0.113.200:312": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:61365->203.0.113.200:378": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:49673->203.0.113.200:626": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59964->203.0.113.200:132": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55248->203.0.113.200:850": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:56651->203.0.113.200:256": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59528->203.0.113.200:895": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62658->203.0.113.200:357": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50586->203.0.113.200:514": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53524->203.0.113.200:1002": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52907->203.0.113.200:863": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53955->203.0.113.200:642": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64739->203.0.113.200:97": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60757->203.0.113.200:966": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59247->203.0.113.200:454": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:61814->203.0.113.200:158": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52615->203.0.113.200:399": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62313->203.0.113.200:607": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51432->203.0.113.200:50": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52818->203.0.113.200:543": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60248->203.0.113.200:284": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55182->203.0.113.200:979": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52748->203.0.113.200:560": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59548->203.0.113.200:546": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64836->203.0.113.200:628": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50037->203.0.113.200:742": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53137->203.0.113.200:461": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53635->203.0.113.200:988": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60702->203.0.113.200:25": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62416->203.0.113.200:624": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51070->203.0.113.200:397": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64455->203.0.113.200:176": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53973->203.0.113.200:853": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52359->203.0.113.200:133": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:65370->203.0.113.200:796": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51597->203.0.113.200:224": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:54939->203.0.113.200:939": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:54291->203.0.113.200:635": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64333->203.0.113.200:376": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:61520->203.0.113.200:152": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51982->203.0.113.200:43": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53601->203.0.113.200:257": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:65139->203.0.113.200:413": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52101->203.0.113.200:907": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62282->203.0.113.200:970": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51692->203.0.113.200:868": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:58064->203.0.113.200:833": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50712->203.0.113.200:673": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:58659->203.0.113.200:808": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59868->203.0.113.200:474": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:61931->203.0.113.200:892": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51932->203.0.113.200:509": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55007->203.0.113.200:486": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51384->203.0.113.200:608": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62176->203.0.113.200:643": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52277->203.0.113.200:561": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:49703->203.0.113.200:770": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55427->203.0.113.200:987": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:58284->203.0.113.200:76": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55946->203.0.113.200:906": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51420->203.0.113.200:184": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:57669->203.0.113.200:743": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:49941->203.0.113.200:21": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:63954->203.0.113.200:310": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:54855->203.0.113.200:541": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52201->203.0.113.200:202": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64279->203.0.113.200:261": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59613->203.0.113.200:46": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64317->203.0.113.200:156": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53397->203.0.113.200:512": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51819->203.0.113.200:146": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62517->203.0.113.200:422": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59443->203.0.113.200:812": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51598->203.0.113.200:364": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59705->203.0.113.200:507": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:63489->203.0.113.200:776": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:56589->203.0.113.200:691": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51549->203.0.113.200:84": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55301->203.0.113.200:564": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64966->203.0.113.200:362": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50808->203.0.113.200:281": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64680->203.0.113.200:707": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55601->203.0.113.200:407": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:56949->203.0.113.200:685": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60391->203.0.113.200:316": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64078->203.0.113.200:502": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60905->203.0.113.200:392": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60262->203.0.113.200:497": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:49319->203.0.113.200:523": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51438->203.0.113.200:182": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52842->203.0.113.200:189": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51925->203.0.113.200:927": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50608->203.0.113.200:736": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51969->203.0.113.200:390": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55874->203.0.113.200:740": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:57944->203.0.113.200:369": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62206->203.0.113.200:933": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62706->203.0.113.200:575": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:57790->203.0.113.200:888": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59451->203.0.113.200:144": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50894->203.0.113.200:170": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64362->203.0.113.200:69": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50170->203.0.113.200:567": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:56598->203.0.113.200:890": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60664->203.0.113.200:537": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:49862->203.0.113.200:801": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60280->203.0.113.200:721": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:49407->203.0.113.200:713": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:64330->203.0.113.200:186": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:56847->203.0.113.200:67": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55980->203.0.113.200:674": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59728->203.0.113.200:55": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:63697->203.0.113.200:910": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:63307->203.0.113.200:175": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:63180->203.0.113.200:124": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50446->203.0.113.200:192": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:61217->203.0.113.200:787": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:60499->203.0.113.200:934": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:61036->203.0.113.200:242": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53778->203.0.113.200:539": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:56205->203.0.113.200:594": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:54795->203.0.113.200:928": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:57785->203.0.113.200:381": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53523->203.0.113.200:925": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62999->203.0.113.200:254": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62949->203.0.113.200:74": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:51262->203.0.113.200:852": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50944->203.0.113.200:157": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:58675->203.0.113.200:319": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:50943->203.0.113.200:821": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:58636->203.0.113.200:720": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59245->203.0.113.200:205": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:61663->203.0.113.200:891": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55054->203.0.113.200:447": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:61977->203.0.113.200:451": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:49643->203.0.113.200:1020": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53532->203.0.113.200:418": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:52839->203.0.113.200:847": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:59365->203.0.113.200:181": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:53415->203.0.113.200:213": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55701->203.0.113.200:758": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:63376->203.0.113.200:882": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:62449->203.0.113.200:704": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55237->203.0.113.200:188": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:58851->203.0.113.200:809": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:58895->203.0.113.200:329": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:55536->203.0.113.200:905": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.1:63015->203.0.113.200:1009": {
+    "sni": null,
+    "http_host": null,
+    "app": "PORT_SCAN",
+    "type": "tcp",
+    "packet_count": 1,
+    "anomaly": "PORT_SCAN"
+  },
+  "10.99.99.2:49201->203.0.113.201:80": {
+    "sni": null,
+    "http_host": null,
+    "app": "DDOS",
+    "type": "udp",
+    "packet_count": 500,
+    "anomaly": "DDOS"
+  },
+  "192.168.1.100:52704->198.51.100.1:8443": {
+    "sni": null,
+    "http_host": null,
+    "app": "EXFIL",
+    "type": "tcp",
+    "packet_count": 24,
+    "anomaly": "EXFIL"
   }
 }

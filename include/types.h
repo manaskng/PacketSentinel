@@ -86,6 +86,21 @@ enum class AppType : uint8_t {
 };
 
 // ---------------------------------------------------------------------------
+// AnomalyType — categories of detected network anomalies
+// ---------------------------------------------------------------------------
+enum class AnomalyType : uint8_t {
+    NONE = 0,
+    PORT_SCAN,          // Many flows to unique ports from one source
+    DDOS_SUSPECT,       // Uniform packet sizes at extremely high rate
+    DATA_EXFILTRATION,  // Abnormally large payloads per flow
+    HIGH_ENTROPY,       // Near-max entropy on non-TLS traffic
+    PROTOCOL_ANOMALY,   // Malformed or suspicious TCP flag combinations
+    _COUNT
+};
+
+std::string anomalyTypeToString(AnomalyType t);
+
+// ---------------------------------------------------------------------------
 // FiveTuple — unique connection identifier
 // ---------------------------------------------------------------------------
 struct FiveTuple {
@@ -150,6 +165,34 @@ struct Flow {
 
     uint32_t    src_ip  = 0;              // cached from first packet
     uint32_t    dst_ip  = 0;
+
+    // -- Anomaly detection fields ------------------------------------------
+    double      anomaly_score  = 0.0;      // 0.0 = normal, 1.0 = highly anomalous
+    AnomalyType anomaly_type   = AnomalyType::NONE;
+
+    // TCP flag counters
+    uint32_t    syn_count      = 0;
+    uint32_t    fin_count      = 0;
+    uint32_t    rst_count      = 0;
+
+    // Payload entropy (Shannon, 0.0–8.0 bits)
+    double      payload_entropy = 0.0;
+
+    // Online variance via Welford's algorithm (no vector needed)
+    double      pkt_size_mean  = 0.0;
+    double      pkt_size_m2    = 0.0;      // running sum of squared diffs
+
+    // Timing
+    uint64_t    first_seen_ms  = 0;
+    uint64_t    last_seen_ms   = 0;
+
+    // Helpers
+    double packetSizeVariance() const {
+        return packet_count > 1 ? pkt_size_m2 / (packet_count - 1) : 0.0;
+    }
+    double durationMs() const {
+        return (last_seen_ms > first_seen_ms) ? (double)(last_seen_ms - first_seen_ms) : 0.0;
+    }
 };
 
 // ---------------------------------------------------------------------------

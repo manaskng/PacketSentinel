@@ -46,6 +46,7 @@ jobs:
           src/rule_manager.cpp \
           src/load_balancer.cpp \
           src/fast_path.cpp \
+          src/flow_analyzer.cpp \
           src/dpi_engine.cpp \
           src/main_mt.cpp \
           -lpthread
@@ -121,6 +122,7 @@ jobs:
           src/rule_manager.cpp \
           src/load_balancer.cpp \
           src/fast_path.cpp \
+          src/flow_analyzer.cpp \
           src/dpi_engine.cpp \
           src/main_mt.cpp \
           -lpthread

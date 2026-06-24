@@ -58,7 +58,7 @@ void FastPath::processPacket(Packet& pkt) {
     Flow& flow = flows_[pkt.tuple];
 
     if (flow.packet_count == 0) {
-        // New flow — initialize with port-based hint
+        // New flow -- initialize with port-based hint
         flow.src_ip = pkt.tuple.src_ip;
         flow.dst_ip = pkt.tuple.dst_ip;
         flow.app_type = pkt.app_hint;
@@ -70,6 +70,44 @@ void FastPath::processPacket(Packet& pkt) {
 
     ++flow.packet_count;
     flow.byte_count += pkt.data.size();
+
+    // -- Anomaly feature extraction (minimal overhead) ---------------------
+
+    // Welford's online variance for packet sizes (no vector allocation)
+    {
+        double size = static_cast<double>(pkt.data.size());
+        double delta = size - flow.pkt_size_mean;
+        flow.pkt_size_mean += delta / flow.packet_count;
+        double delta2 = size - flow.pkt_size_mean;
+        flow.pkt_size_m2 += delta * delta2;
+    }
+
+    // Track TCP flags from raw packet data
+    if (pkt.tuple.protocol == PROTO_TCP && pkt.data.size() >= 14 + 20 + 14) {
+        size_t ip_offset = 14;  // After Ethernet header
+        uint8_t ihl = (pkt.data[ip_offset] & 0x0F) * 4;
+        size_t tcp_offset = ip_offset + ihl;
+        if (tcp_offset + 14 <= pkt.data.size()) {
+            uint8_t flags = pkt.data[tcp_offset + 13];
+            if (flagSYN(flags)) ++flow.syn_count;
+            if (flagFIN(flags)) ++flow.fin_count;
+            if (flagRST(flags)) ++flow.rst_count;
+        }
+    }
+
+    // Update timestamps
+    uint64_t ts_ms = (uint64_t)pkt.pcap_hdr.ts_sec * 1000 +
+                     pkt.pcap_hdr.ts_usec / 1000;
+    if (flow.first_seen_ms == 0) flow.first_seen_ms = ts_ms;
+    flow.last_seen_ms = ts_ms;
+
+    // Shannon entropy of current payload (overwritten each packet)
+    if (pkt.payload && pkt.payload_len > 0) {
+        flow.payload_entropy = FlowAnalyzer::shannonEntropy(
+            pkt.payload, pkt.payload_len);
+    }
+
+    // -- End feature extraction --------------------------------------------
 
     // If flow is already classified and blocked, fast-drop
     if (flow.blocked) {
@@ -84,18 +122,28 @@ void FastPath::processPacket(Packet& pkt) {
 
     // Rule check after classification
     if (!flow.classified) {
-        // Not yet classified — check IP rule only
+        // Not yet classified -- check IP rule only
         if (rules_.isBlocked(pkt.tuple.src_ip, AppType::UNKNOWN, "")) {
             flow.blocked = true;
             ++dropped_;
             return;
         }
     } else {
-        // Fully classified — check all rules
+        // Fully classified -- check all rules
         if (rules_.isBlocked(pkt.tuple.src_ip, flow.app_type, flow.sni)) {
             flow.blocked = true;
             ++dropped_;
             return;
+        }
+    }
+
+    // Anomaly scoring (amortized: run every 5 packets to limit overhead)
+    if (flow.packet_count >= 5 && flow.packet_count % 5 == 0) {
+        auto result = FlowAnalyzer::score(flow);
+        flow.anomaly_score = result.score;
+        flow.anomaly_type  = result.type;
+        if (result.score >= FlowAnalyzer::FLAG_THRESHOLD) {
+            ++anomalies_;
         }
     }
 

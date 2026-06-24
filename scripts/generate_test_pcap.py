@@ -337,7 +337,8 @@ def generate_tcp_flow(out, ts, app_entry, client_ip, client_port, ground_truth):
         'http_host': sni if traffic_type == 'http' else None,
         'app': app_name,
         'type': traffic_type,
-        'packet_count': len(packets)
+        'packet_count': len(packets),
+        'anomaly': None
     }
 
     return ts
@@ -357,10 +358,136 @@ def generate_dns_flow(out, ts, domain, client_ip, ground_truth):
         'dns_query': domain,
         'app': 'DNS',
         'type': 'dns',
-        'packet_count': 1
+        'packet_count': 1,
+        'anomaly': None
     }
 
     return ts + random.uniform(0.001, 0.01)
+
+# ---------------------------------------------------------------------------
+# Attack traffic generators
+# ---------------------------------------------------------------------------
+
+def generate_port_scan(out, ts, ground_truth):
+    """Port scan: single attacker sends TCP SYN to 200 unique ports on a target."""
+    attacker_ip = '10.99.99.1'
+    target_ip   = '203.0.113.200'
+    ports       = random.sample(range(1, 1025), 200)
+
+    for dst_port in ports:
+        src_port = random_port()
+
+        # Single SYN packet per port — no payload
+        pkt = make_tcp_packet(
+            attacker_ip, target_ip, src_port, dst_port,
+            random.randint(1000, 999999), 0, 0x02)  # SYN flag
+
+        ts_sec  = int(ts)
+        ts_usec = int((ts - ts_sec) * 1e6)
+        out.append((ts_sec, ts_usec, pkt))
+        ts += random.uniform(0.00005, 0.0005)  # Very fast scanning
+
+        flow_key = f"{attacker_ip}:{src_port}->{target_ip}:{dst_port}"
+        ground_truth[flow_key] = {
+            'sni': None,
+            'http_host': None,
+            'app': 'PORT_SCAN',
+            'type': 'tcp',
+            'packet_count': 1,
+            'anomaly': 'PORT_SCAN'
+        }
+
+    return ts
+
+def generate_ddos_flood(out, ts, ground_truth):
+    """DDoS flood: attacker sends 500 identical UDP packets to port 80."""
+    attacker_ip = '10.99.99.2'
+    target_ip   = '203.0.113.201'
+    target_port = 80
+    payload     = bytes(random.randint(0, 255) for _ in range(64))  # Fixed 64-byte payload
+
+    # All 500 packets share one source port => one flow
+    src_port = random_port()
+
+    for _ in range(500):
+        pkt = make_udp_packet(attacker_ip, target_ip, src_port, target_port, payload)
+
+        ts_sec  = int(ts)
+        ts_usec = int((ts - ts_sec) * 1e6)
+        out.append((ts_sec, ts_usec, pkt))
+        ts += random.uniform(0.00001, 0.0001)  # Extremely rapid fire
+
+    flow_key = f"{attacker_ip}:{src_port}->{target_ip}:{target_port}"
+    ground_truth[flow_key] = {
+        'sni': None,
+        'http_host': None,
+        'app': 'DDOS',
+        'type': 'udp',
+        'packet_count': 500,
+        'anomaly': 'DDOS'
+    }
+
+    return ts
+
+def generate_exfiltration(out, ts, ground_truth):
+    """Data exfiltration: internal host sends 20 large high-entropy TCP packets."""
+    internal_ip  = '192.168.1.100'
+    external_ip  = '198.51.100.1'
+    external_port = 8443
+    src_port      = random_port()
+
+    seq = random.randint(1000, 999999)
+    ack = random.randint(1000, 999999)
+
+    packets = []
+
+    # SYN
+    packets.append(make_tcp_packet(
+        internal_ip, external_ip, src_port, external_port,
+        seq, 0, 0x02))
+
+    # SYN-ACK (simulated response)
+    packets.append(make_tcp_packet(
+        external_ip, internal_ip, external_port, src_port,
+        ack, seq + 1, 0x12))
+
+    # ACK
+    packets.append(make_tcp_packet(
+        internal_ip, external_ip, src_port, external_port,
+        seq + 1, ack + 1, 0x10))
+
+    # 20 data packets with 4096-byte high-entropy payloads (~80KB total)
+    current_seq = seq + 1
+    for _ in range(20):
+        payload = bytes(random.randint(0, 255) for _ in range(4096))
+        packets.append(make_tcp_packet(
+            internal_ip, external_ip, src_port, external_port,
+            current_seq, ack + 1, 0x18,  # PSH+ACK
+            payload))
+        current_seq += 4096
+
+    # FIN
+    packets.append(make_tcp_packet(
+        internal_ip, external_ip, src_port, external_port,
+        current_seq, ack + 1, 0x11))  # FIN+ACK
+
+    for pkt_data in packets:
+        ts_sec  = int(ts)
+        ts_usec = int((ts - ts_sec) * 1e6)
+        out.append((ts_sec, ts_usec, pkt_data))
+        ts += random.uniform(0.0005, 0.005)
+
+    flow_key = f"{internal_ip}:{src_port}->{external_ip}:{external_port}"
+    ground_truth[flow_key] = {
+        'sni': None,
+        'http_host': None,
+        'app': 'EXFIL',
+        'type': 'tcp',
+        'packet_count': len(packets),
+        'anomaly': 'EXFIL'
+    }
+
+    return ts
 
 # ---------------------------------------------------------------------------
 # Main generator
@@ -387,6 +514,11 @@ def generate_pcap(filename, num_flows, ground_truth):
         client_port = random_port()
         app_entry   = ('www.youtube.com', 'YouTube', 443, 'tls')
         ts = generate_tcp_flow(packets_out, ts, app_entry, client_ip, client_port, ground_truth)
+
+    # Attack traffic
+    ts = generate_port_scan(packets_out, ts, ground_truth)
+    ts = generate_ddos_flood(packets_out, ts, ground_truth)
+    ts = generate_exfiltration(packets_out, ts, ground_truth)
 
     print(f"  Generated {len(packets_out)} packets from {len(ground_truth)} flows")
 
@@ -428,13 +560,20 @@ if __name__ == '__main__':
     print("  Written: test_data/ground_truth_large.json")
 
     # Print summary
-    tls_flows  = sum(1 for v in ground_truth_large.values() if v.get('type') == 'tls')
-    http_flows = sum(1 for v in ground_truth_large.values() if v.get('type') == 'http')
-    dns_flows  = sum(1 for v in ground_truth_large.values() if v.get('type') == 'dns')
+    tls_flows   = sum(1 for v in ground_truth_large.values() if v.get('type') == 'tls')
+    http_flows  = sum(1 for v in ground_truth_large.values() if v.get('type') == 'http')
+    dns_flows   = sum(1 for v in ground_truth_large.values() if v.get('type') == 'dns')
+    scan_flows  = sum(1 for v in ground_truth_large.values() if v.get('anomaly') == 'PORT_SCAN')
+    ddos_flows  = sum(1 for v in ground_truth_large.values() if v.get('anomaly') == 'DDOS')
+    exfil_flows = sum(1 for v in ground_truth_large.values() if v.get('anomaly') == 'EXFIL')
 
     print(f"\nFlow breakdown (large):")
-    print(f"  TLS flows:  {tls_flows}")
-    print(f"  HTTP flows: {http_flows}")
-    print(f"  DNS flows:  {dns_flows}")
-    print(f"  Total:      {len(ground_truth_large)}")
+    print(f"  TLS flows:       {tls_flows}")
+    print(f"  HTTP flows:      {http_flows}")
+    print(f"  DNS flows:       {dns_flows}")
+    print(f"  --- Attack flows ---")
+    print(f"  Port scan:       {scan_flows}")
+    print(f"  DDoS flood:      {ddos_flows}")
+    print(f"  Exfiltration:    {exfil_flows}")
+    print(f"  Total:           {len(ground_truth_large)}")
     print("\nDone! Run 'dpi_simple test_data/test_small.pcap output.pcap' to test.")

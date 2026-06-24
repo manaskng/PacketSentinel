@@ -52,6 +52,20 @@ PacketSentinel goes significantly deeper than basic network monitors that only r
 
 YouTube, Netflix, TikTok, Facebook, Instagram, Twitter/X, Discord, WhatsApp, Twitch, Reddit, GitHub, Google — and any unknown domain is captured and listed.
 
+### Anomaly Detection (Machine Learning Ready)
+
+PacketSentinel implements real-time, wire-speed statistical anomaly detection alongside its DPI classification. The anomaly feature extraction requires zero locking and operates entirely on the hot path. 
+
+| Detector | Heuristic/Feature Used | Research Basis |
+|---|---|---|
+| **Port Scan** | Low packet count + SYN-only flags | NSL-KDD `probe` behavior |
+| **DDoS Suspect** | High frequency + uniform packet sizes (near-zero variance) | CICIDS2017 `DoS` signature |
+| **Data Exfiltration** | Large average payload sizes + high volume | CICIDS2017 `Infiltration` signature |
+| **High Entropy** | Shannon entropy > 7.5 bits on non-TLS ports | Custom C2/Tunneling indicator |
+| **Protocol Anomaly** | Abnormal TCP flag ratios (e.g. Christmas tree SYN+FIN+RST) | NSL-KDD flag features |
+
+Features are extracted using Welford's online variance algorithm (O(1) memory) and Shannon entropy calculations. The engine exports a flow feature CSV (`--export-features`) that serves as the training dataset for the included Scikit-Learn offline Random Forest model.
+
 ### Traffic Control
 
 Rules are loaded from `rules.json` at startup and applied on the hot path:
@@ -61,7 +75,7 @@ Rules are loaded from `rules.json` at startup and applied on the hot path:
 - Block by **domain name** (e.g., block `tiktok.com` directly)
 - Throttle by **application category** with configurable delay
 
-Once a 5-tuple flow is classified, the decision is cached in the per-FastPath flow table. All subsequent packets of that connection are forwarded or dropped without re-running the DPI logic, maintaining wire-speed performance.
+Once a 5-tuple flow is classified or flagged as anomalous, the decision is cached in the per-FastPath flow table. All subsequent packets of that connection are forwarded or dropped without re-running the DPI logic, maintaining wire-speed performance.
 
 ---
 
@@ -170,6 +184,12 @@ python scripts/generate_test_pcap.py
 # Write real-time stats to stats.json for dashboard
 ./dpi_engine capture.pcap filtered.pcap --lbs 2 --fps 2 --stats-json
 
+# Enable anomaly detection and export feature vectors for ML training
+./dpi_engine capture.pcap filtered.pcap --export-features flow_features.csv
+
+# Train the offline Random Forest model on the exported features
+python scripts/train_anomaly_model.py --features flow_features.csv
+
 # Run throughput benchmark
 python scripts/benchmark.py
 ```
@@ -236,11 +256,12 @@ PacketSentinel/
 │   ├── main_simple.cpp        # Single-threaded entry point
 │   └── main_mt.cpp            # Multi-threaded entry point
 ├── dashboard/
-│   ├── index.html             # Enterprise analytics dashboard
+│   ├── index.html             # Enterprise analytics dashboard (includes anomaly table)
 │   ├── dashboard.css          # Vercel-style dark theme
 │   └── dashboard.js           # Chart.js polling and rendering
 ├── scripts/
-│   ├── generate_test_pcap.py  # Synthetic 50K-packet test dataset generator
+│   ├── generate_test_pcap.py  # PCAP generator with injected port scan/DDoS/Exfil attacks
+│   ├── train_anomaly_model.py # Scikit-Learn Random Forest pipeline for offline training
 │   └── benchmark.py           # Throughput benchmark harness
 ├── test_data/                 # Generated test PCAP files
 ├── .github/workflows/

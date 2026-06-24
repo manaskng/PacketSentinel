@@ -28,6 +28,7 @@ SRCS_SIMPLE = $(SRCS_COMMON) src/main_simple.cpp
 SRCS_MT     = $(SRCS_COMMON) \
               src/load_balancer.cpp \
               src/fast_path.cpp \
+              src/flow_analyzer.cpp \
               src/dpi_engine.cpp \
               src/main_mt.cpp
 

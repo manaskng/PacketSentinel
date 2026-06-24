@@ -22,6 +22,7 @@
 #include <atomic>
 #include <functional>
 #include <chrono>
+#include <map>
 
 struct DPIConfig {
     std::string  input_file;
@@ -54,6 +55,20 @@ struct AggregatedStats {
     // App type counts (aggregated from all FP flow tables)
     std::vector<std::pair<AppType, uint64_t>> app_pkt_counts;
     std::vector<std::string> detected_snis;
+
+    // Anomaly detection stats
+    uint64_t total_anomalies = 0;
+    std::map<std::string, uint64_t> anomaly_breakdown;  // type -> count
+
+    struct AnomalousFlow {
+        std::string src_ip;
+        std::string dst_ip;
+        double      score;
+        std::string type;
+        std::string sni;
+        uint64_t    packet_count;
+    };
+    std::vector<AnomalousFlow> top_anomalies;  // top 10 by score
 };
 
 class DPIEngine {
