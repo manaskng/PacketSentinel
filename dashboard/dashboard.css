@@ -16,7 +16,7 @@
     --accent-blue:   #0070f3;
     --accent-green:  #059669;
     --accent-red:    #dc2626;
-    --accent-amber:  #d97706;
+    --accent-amber:  #0f766e; /* Replaced orange with cool teal for harmony */
     --accent-purple: #7c3aed;
     --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
 }
@@ -33,7 +33,7 @@
     --accent-blue:   #3b82f6;
     --accent-green:  #10b981;
     --accent-red:    #ef4444;
-    --accent-amber:  #f59e0b;
+    --accent-amber:  #14b8a6; /* Teal instead of amber */
     --accent-purple: #a78bfa;
     --shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
@@ -62,13 +62,8 @@ body {
 .loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 .load-inner { text-align: center; }
 .load-logo {
-    width: 56px; height: 56px;
-    background: var(--accent-blue);
-    color: #fff;
-    font-size: 20px; font-weight: 700;
-    border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 16px;
+    margin: 0 auto 16px; color: var(--accent-blue);
     animation: pulse 1.5s ease-in-out infinite;
 }
 @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
@@ -91,16 +86,12 @@ body {
     display: flex; align-items: center; justify-content: space-between;
 }
 .logo { display: flex; align-items: center; gap: 12px; }
-.logo-mark {
-    width: 36px; height: 36px;
-    background: var(--accent-blue);
-    color: #fff; font-size: 13px; font-weight: 700;
-    border-radius: 8px;
+.logo-icon {
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+    color: var(--text-1); flex-shrink: 0;
 }
 .logo-title { font-size: 15px; font-weight: 700; color: var(--text-1); }
-.logo-sub { font-size: 11px; color: var(--text-3); margin-top: 1px; }
+.logo-sub { font-size: 12px; color: var(--text-3); margin-top: 1px; }
 .header-right { display: flex; align-items: center; gap: 16px; }
 .status-badge { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2); }
 .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-amber); animation: blink 2s infinite; }
@@ -139,9 +130,9 @@ body {
 }
 .metric-card:hover { border-color: var(--border-h); }
 .anomaly-card { border-left: 3px solid var(--accent-amber); }
-.metric-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-3); text-transform: uppercase; margin-bottom: 8px; }
+.metric-label { font-size: 12px; font-weight: 500; color: var(--text-3); margin-bottom: 8px; }
 .metric-value { font-size: 28px; font-weight: 700; color: var(--text-1); line-height: 1.1; font-family: 'Fira Code', monospace; }
-.metric-delta { font-size: 11px; color: var(--text-3); margin-top: 6px; }
+.metric-delta { font-size: 12px; color: var(--text-3); margin-top: 6px; }
 .accent-blue   { color: var(--accent-blue)   !important; }
 .accent-green  { color: var(--accent-green)  !important; }
 .accent-red    { color: var(--accent-red)    !important; }
@@ -162,12 +153,12 @@ body {
     padding: 14px 20px;
     border-bottom: 1px solid var(--border);
 }
-.panel-title { font-size: 13px; font-weight: 600; color: var(--text-1); }
-.panel-tag { font-size: 11px; color: var(--text-3); font-family: 'Fira Code', monospace; }
+.panel-title { font-size: 14px; font-weight: 600; color: var(--text-1); }
+.panel-tag { font-size: 12px; color: var(--text-3); font-family: 'Fira Code', monospace; }
 .panel-badge {
-    font-size: 11px; font-weight: 600;
+    font-size: 12px; font-weight: 500;
     background: var(--accent-amber);
-    color: #fff; padding: 2px 8px; border-radius: 999px;
+    color: #fff; padding: 2px 10px; border-radius: 999px;
 }
 
 /* ---- Pipeline Visualiser --------------------------------------------------- */
@@ -195,11 +186,11 @@ body {
 .pipe-node.lb      { border-color: var(--accent-green);  color: var(--accent-green); }
 .pipe-node.fp      { border-color: var(--accent-purple); color: var(--accent-purple); }
 .pipe-node.output  { border-color: var(--accent-amber);  color: var(--accent-amber); }
-.pipe-label { font-size: 10px; color: var(--text-3); text-align: center; }
-.pipe-sub { font-size: 10px; color: var(--text-3); font-family: 'Fira Code', monospace; }
+.pipe-label { font-size: 12px; color: var(--text-3); text-align: center; }
+.pipe-sub { font-size: 11px; color: var(--text-3); font-family: 'Fira Code', monospace; }
 .pipe-arrow {
     display: flex; align-items: center; padding: 0 4px; color: var(--text-3);
-    font-size: 18px; padding-top: 0px; flex-shrink: 0; align-self: flex-start; margin-top: 18px;
+    font-size: 18px; flex-shrink: 0; align-self: center; margin-top: -30px;
 }
 .pipe-group { display: flex; gap: 6px; }
 
@@ -239,8 +230,8 @@ body {
 .table-container { overflow-x: auto; }
 .data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
 .data-table th {
-    padding: 10px 16px; text-align: left;
-    font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 12px 16px; text-align: left;
+    font-size: 12px; font-weight: 500;
     color: var(--text-3); border-bottom: 1px solid var(--border);
     background: var(--bg-hover);
     white-space: nowrap;
@@ -259,34 +250,34 @@ body {
 .loading-msg { padding: 24px; text-align: center; color: var(--text-3); }
 
 /* ---- Tags ------------------------------------------------------------------ */
-.tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+.tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
 .tag-red    { background: rgba(220,38,38,0.1);   color: var(--accent-red); }
-.tag-amber  { background: rgba(217,119,6,0.1);   color: var(--accent-amber); }
+.tag-amber  { background: rgba(20,184,166,0.1);  color: var(--accent-amber); }
 .tag-purple { background: rgba(124,58,237,0.1);  color: var(--accent-purple); }
 .tag-green  { background: rgba(5,150,105,0.1);   color: var(--accent-green); }
 
 /* ---- Status Pills ---------------------------------------------------------- */
-.status-pill { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px; }
+.status-pill { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 4px; }
 .status-allowed { background: rgba(5,150,105,0.1); color: var(--accent-green); }
 .status-blocked { background: rgba(220,38,38,0.1); color: var(--accent-red); }
-.status-anomaly { background: rgba(217,119,6,0.1); color: var(--accent-amber); }
-.anomaly-score  { font-family: 'Fira Code', monospace; font-weight: 600; font-size: 12px; }
+.status-anomaly { background: rgba(20,184,166,0.1); color: var(--accent-amber); }
+.anomaly-score  { font-family: 'Fira Code', monospace; font-weight: 500; font-size: 12px; }
 
 /* ---- List Containers ------------------------------------------------------- */
 .list-container { padding: 8px 0; max-height: 200px; overflow-y: auto; }
 .list-item { padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
 .list-item:last-child { border-bottom: none; }
-.list-item-main { font-size: 12px; color: var(--text-1); font-family: 'Fira Code', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.list-item-sub  { font-size: 10px; color: var(--text-3); margin-left: 8px; white-space: nowrap; }
+.list-item-main { font-size: 13px; color: var(--text-1); font-family: 'Fira Code', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.list-item-sub  { font-size: 11px; color: var(--text-3); margin-left: 8px; white-space: nowrap; }
 
 /* ---- Architecture Block ---------------------------------------------------- */
 .arch-panel .panel-header { border-bottom: 1px solid var(--border); }
 .arch-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
 .arch-card { padding: 24px; border-right: 1px solid var(--border); }
 .arch-card:last-child { border-right: none; }
-.arch-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 10px; }
-.arch-card h3 { font-size: 13px; font-weight: 600; color: var(--text-1); margin-bottom: 8px; }
-.arch-card p  { font-size: 12px; color: var(--text-2); line-height: 1.6; }
+.arch-tag { font-size: 11px; font-weight: 500; color: var(--accent-blue); margin-bottom: 10px; }
+.arch-card h3 { font-size: 14px; font-weight: 600; color: var(--text-1); margin-bottom: 8px; }
+.arch-card p  { font-size: 13px; color: var(--text-2); line-height: 1.6; }
 
 /* ---- Footer ---------------------------------------------------------------- */
 .footer { border-top: 1px solid var(--border); margin-top: 20px; padding: 20px 24px; }
