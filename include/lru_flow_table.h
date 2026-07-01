@@ -61,6 +61,7 @@ public:
         // Insert new flow at end of LRU list
         lru_list_.push_back({tuple, Flow(), std::chrono::system_clock::now()});
         auto lru_iter = std::prev(lru_list_.end());
+        lru_iter->lru_iter = lru_iter; // SECURITY FIX: Initialize the iterator
         flows_map_[tuple] = &(*lru_iter);
         return lru_iter->flow;
     }
