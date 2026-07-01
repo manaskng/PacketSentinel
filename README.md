@@ -10,7 +10,7 @@ A high-performance, **zero-dependency** network traffic analysis engine written 
 
 Designed to demonstrate production-grade systems engineering: multi-threaded pipeline architecture, lock-free per-thread flow tables with LRU eviction, and a decoupled real-time analytics dashboard.
 
-**⭐ v1.1 Security Release**: Added LRU flow table eviction (prevents DoS), fixed domain suffix matching bypass, enhanced SNI validation, and comprehensive unit tests.
+** v1.1 Security Release**: Added LRU flow table eviction (prevents DoS), fixed domain suffix matching bypass, enhanced SNI validation, and comprehensive unit tests.
 
 ---
 
