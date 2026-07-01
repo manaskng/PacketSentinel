@@ -96,6 +96,22 @@ void RuleManager::addThrottledApp(AppType app) {
 }
 
 // ---------------------------------------------------------------------------
+// domainMatches — check if SNI matches a domain rule using suffix matching
+// SECURITY FIX: Prevents bypass like "tiktok.com.attacker.com" matching "tiktok.com"
+// Returns true if sni == domain or sni ends with ".domain"
+// ---------------------------------------------------------------------------
+static bool domainMatches(const std::string& sni, const std::string& domain) {
+    if (sni == domain) return true;
+    if (sni.length() <= domain.length()) return false;
+    
+    // Check if sni ends with ".domain"
+    size_t pos = sni.length() - domain.length();
+    if (sni[pos - 1] != '.') return false;  // Must have '.' before domain
+    
+    return sni.compare(pos, domain.length(), domain) == 0;
+}
+
+// ---------------------------------------------------------------------------
 // isBlocked — three-stage rule check
 // ---------------------------------------------------------------------------
 bool RuleManager::isBlocked(uint32_t src_ip, AppType app,
@@ -106,12 +122,12 @@ bool RuleManager::isBlocked(uint32_t src_ip, AppType app,
     // Stage 2: App type blacklist (O(1))
     if (app != AppType::UNKNOWN && blocked_apps_.count(app)) return true;
 
-    // Stage 3: Domain substring match (O(N * M) but N is usually < 20)
+    // Stage 3: Domain suffix match with security fix (O(N * M) but N is usually < 20)
     if (!sni.empty() && !blocked_domains_.empty()) {
         std::string lower_sni = sni;
         std::transform(lower_sni.begin(), lower_sni.end(), lower_sni.begin(), ::tolower);
         for (const auto& dom : blocked_domains_) {
-            if (lower_sni.find(dom) != std::string::npos) return true;
+            if (domainMatches(lower_sni, dom)) return true;
         }
     }
 

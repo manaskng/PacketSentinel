@@ -13,11 +13,16 @@
 // No locking on the hot path. The consistent hashing guarantee from LB
 // ensures that all packets of one flow always arrive at the same FP.
 //
+// SECURITY FIX (v1.1): Flow table now uses LRU eviction to prevent
+// unbounded memory growth during DoS attacks. Maximum 100K concurrent
+// flows per FastPath, with LRU eviction when full.
+//
 // INTERVIEW TALKING POINT:
 //   "Per-thread flow tables eliminate ALL locking on the classification
 //    hot path. A shared flow table would require a read-write lock on
 //    every lookup, adding contention that grows with thread count and
-//    negates the benefit of parallelism."
+//    negates the benefit of parallelism. LRU eviction ensures bounded
+//    memory under attack."
 // =============================================================================
 
 #ifndef DPI_FAST_PATH_H
@@ -28,7 +33,7 @@
 #include "rule_manager.h"
 #include "sni_extractor.h"
 #include "flow_analyzer.h"
-#include <unordered_map>
+#include "lru_flow_table.h"
 #include <thread>
 #include <atomic>
 #include <memory>
@@ -39,10 +44,12 @@ public:
     // rules:         shared read-only rule engine
     // output_queue:  shared output queue (written to PCAP by writer thread)
     // queue_cap:     input queue capacity
+    // max_flows:     maximum flows before LRU eviction (default 100K)
     FastPath(int id,
              const RuleManager& rules,
              TSQueue<Packet>*   output_queue,
-             size_t             queue_cap = 1024);
+             size_t             queue_cap = 1024,
+             size_t             max_flows = 100000);
 
     ~FastPath();
 
@@ -62,12 +69,14 @@ public:
     uint64_t dropped()    const { return dropped_.load();    }
     uint64_t classified() const { return classified_.load(); }
     uint64_t anomalies()  const { return anomalies_.load();  }
+    uint64_t evictions()  const { return flow_table_.evictionsTotal(); }
 
     int id() const { return id_; }
 
     // Flow table access (only safe after stop() is called)
-    const std::unordered_map<FiveTuple, Flow>& flowTable() const {
-        return flows_;
+    // Returns a snapshot of all active flows
+    std::unordered_map<FiveTuple, Flow> flowTable() const {
+        return flow_table_.exportFlows();
     }
 
 private:
@@ -84,8 +93,8 @@ private:
     TSQueue<Packet>*    output_queue_;    // shared (not owned)
     TSQueue<Packet>     input_queue_;
 
-    // Per-FP flow table — NO LOCKS NEEDED (exclusive ownership)
-    std::unordered_map<FiveTuple, Flow> flows_;
+    // Per-FP flow table with LRU eviction (bounded memory)
+    LRUFlowTable        flow_table_;
 
     std::thread          thread_;
     std::atomic<bool>    running_{false};

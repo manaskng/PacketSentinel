@@ -9,13 +9,14 @@
 #include <iostream>
 
 FastPath::FastPath(int id, const RuleManager& rules,
-                   TSQueue<Packet>* output_queue, size_t queue_cap)
+                   TSQueue<Packet>* output_queue, size_t queue_cap,
+                   size_t max_flows)
     : id_(id)
     , rules_(rules)
     , output_queue_(output_queue)
     , input_queue_(queue_cap)
+    , flow_table_(max_flows)
 {
-    flows_.reserve(1024);  // Pre-allocate for performance
 }
 
 FastPath::~FastPath() {
@@ -52,10 +53,10 @@ void FastPath::run() {
 // processPacket — classify + rule check + route
 // ---------------------------------------------------------------------------
 void FastPath::processPacket(Packet& pkt) {
-    // Retrieve or create the flow for this 5-tuple
-    // KEY INSIGHT: This is the only unordered_map access, and it's
-    // lock-free because this FP EXCLUSIVELY owns flows_
-    Flow& flow = flows_[pkt.tuple];
+    // Retrieve or create the flow for this 5-tuple from LRU table
+    // SECURITY FIX: LRU table enforces max_flows limit with eviction
+    // This is lock-free because this FP EXCLUSIVELY owns flow_table_
+    Flow& flow = flow_table_.getOrCreate(pkt.tuple);
 
     if (flow.packet_count == 0) {
         // New flow -- initialize with port-based hint

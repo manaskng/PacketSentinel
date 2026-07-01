@@ -34,10 +34,12 @@ SRCS_MT     = $(SRCS_COMMON) \
 
 TARGET_SIMPLE = dpi_simple$(EXT)
 TARGET_MT     = dpi_engine$(EXT)
+TARGET_TEST_SNI = test_sni$(EXT)
+TARGET_TEST_DOMAIN = test_domain$(EXT)
 
 # ---- Targets ----------------------------------------------------------------
 
-.PHONY: all simple mt test clean test_data benchmark
+.PHONY: all simple mt test clean test_data benchmark test_sni test_domain test_all
 
 all: simple mt
 
@@ -56,6 +58,34 @@ $(TARGET_MT): $(SRCS_MT)
 test_data:
 	python scripts/generate_test_pcap.py
 
+# Unit tests (requires C++17 compiler: GCC 13+ or Clang 5+)
+test_sni: $(TARGET_TEST_SNI)
+	@echo "Running SNI extraction unit tests..."
+	./$(TARGET_TEST_SNI)
+
+$(TARGET_TEST_SNI): tests/test_sni_extractor.cpp src/sni_extractor.cpp src/types.cpp
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+	@echo "Built: $@"
+
+test_domain: $(TARGET_TEST_DOMAIN)
+	@echo "Running domain matching unit tests..."
+	./$(TARGET_TEST_DOMAIN)
+
+$(TARGET_TEST_DOMAIN): tests/test_domain_matching.cpp src/rule_manager.cpp src/types.cpp
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+	@echo "Built: $@"
+
+# Run all tests (integration + unit)
+test_all: all test_data test_sni test_domain
+	@echo "--- Single-threaded integration test ---"
+	./$(TARGET_SIMPLE) test_data/test_small.pcap test_data/out_simple$(EXT).pcap \
+	    --block-app YouTube --block-ip 192.168.1.50
+	@echo "--- Multi-threaded integration test ---"
+	./$(TARGET_MT) test_data/test_small.pcap test_data/out_mt$(EXT).pcap \
+	    --lbs 2 --fps 2 --block-app YouTube --no-stats
+	@echo "✅ All tests passed (integration + unit)"
+
+# Legacy integration tests (backward compat)
 test: all test_data
 	@echo "--- Single-threaded test ---"
 	./$(TARGET_SIMPLE) test_data/test_small.pcap test_data/out_simple$(EXT).pcap \
@@ -69,5 +99,6 @@ benchmark: all test_data
 	python scripts/benchmark.py
 
 clean:
-	rm -f $(TARGET_SIMPLE) $(TARGET_MT) *.o
+	rm -f $(TARGET_SIMPLE) $(TARGET_MT) $(TARGET_TEST_SNI) $(TARGET_TEST_DOMAIN) *.o
 	@echo "Cleaned."
+

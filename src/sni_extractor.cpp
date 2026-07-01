@@ -122,6 +122,10 @@ std::optional<std::string> SNIExtractor::extractSNI(
             uint16_t sni_name_len = readU16BE(payload + offset + 3);  // offset 3
 
             if (sni_type != 0x00) return std::nullopt;  // Not a hostname
+            
+            // SECURITY FIX: Validate hostname length is reasonable (max 255 bytes per DNS spec)
+            // and within extension bounds
+            if (sni_name_len == 0 || sni_name_len > 255) return std::nullopt;
             if (5 + sni_name_len > ext_len) return std::nullopt;
 
             // Extract hostname as string

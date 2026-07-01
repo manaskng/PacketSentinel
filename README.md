@@ -4,10 +4,13 @@
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-informational)](https://github.com/manaskng/PacketSentinel)
 [![Language](https://img.shields.io/badge/language-C%2B%2B17-blue)](https://en.cppreference.com/w/cpp/17)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.1.0-brightgreen)](https://github.com/manaskng/PacketSentinel/releases)
 
 A high-performance, **zero-dependency** network traffic analysis engine written in pure C++17. PacketSentinel performs true Deep Packet Inspection — parsing TLS Client Hello extensions, HTTP Host headers, and DNS query sections at the byte level to classify live traffic into 15 application categories at wire speed.
 
-Designed to demonstrate production-grade systems engineering: multi-threaded pipeline architecture, lock-free per-thread flow tables, and a decoupled real-time analytics dashboard.
+Designed to demonstrate production-grade systems engineering: multi-threaded pipeline architecture, lock-free per-thread flow tables with LRU eviction, and a decoupled real-time analytics dashboard.
+
+**⭐ v1.1 Security Release**: Added LRU flow table eviction (prevents DoS), fixed domain suffix matching bypass, enhanced SNI validation, and comprehensive unit tests.
 
 ---
 
@@ -28,7 +31,32 @@ Benchmarked on a 4-core machine (2 Load Balancers x 2 Fast Paths):
 
 ---
 
-## Dashboard
+## Security & Improvements (v1.1)
+
+### Critical Fixes
+
+| Issue | Fix | Impact |
+|---|---|---|
+| **Unbounded flow table (DoS)** | LRU eviction with max 100K flows per thread | Bounded memory usage (O(max_flows)) under attack |
+| **Domain suffix bypass** | Changed substring matching to proper domain suffix matching | Prevents "tiktok.com.attacker.com" from matching "tiktok.com" rule |
+| **SNI hostname validation** | Added length bounds (1–255 bytes per DNS spec) | Prevents hostname field overflow attacks |
+
+### Testing & Validation
+
+- ✅ **Unit tests** for SNI extraction (8 test cases)
+- ✅ **Domain matching tests** (8 test cases including security bypass prevention)
+- ✅ **LRU flow table tests** (eviction behavior, bounded memory)
+- ✅ **AddressSanitizer** integration (memory safety in CI/CD)
+
+Run tests:
+```bash
+# Compile unit tests (requires C++17 compiler: GCC 13+, Clang 5+)
+make test_sni              # SNI extraction tests
+make test_domain           # Domain matching + security bypass tests
+make test_lru              # LRU flow table eviction tests
+```
+
+---
 
 <!-- Add dashboard screenshot here -->
 > Real-time enterprise analytics dashboard — polling `stats.json` every 2 seconds via Chart.js.
